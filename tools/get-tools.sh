@@ -2,7 +2,7 @@
 #
 # ------------------------------------------------------------------------------
 # This script downloads and/or sets up the following tools:
-#   - [PySmell (233afeb)](https://github.com/chenzhifei731/Pysmell/tree/233afebac24c910be89d065ffa661ec72458a62c)
+#   - [PySmell](https://github.com/QBugs/PySmell)
 #   - [R](https://www.r-project.org)
 #
 # Usage:
@@ -37,15 +37,15 @@ PYSMELL_DIR_PATH="$SCRIPT_DIR/pysmell"
 # Remove any previous file and directory
 rm -rf "$PYSMELL_DIR_PATH"
 
-git clone https://github.com/chenzhifei731/Pysmell.git "$PYSMELL_DIR_PATH"
+git clone https://github.com/QBugs/PySmell.git "$PYSMELL_DIR_PATH"
 if [ "$?" -ne "0" ] || [ ! -d "$PYSMELL_DIR_PATH" ]; then
-  die "[ERROR] Clone of 'chenzhifei731/PySmell' failed!"
+  die "[ERROR] Clone of 'PySmell' failed!"
 fi
 
 pushd . > /dev/null 2>&1
 cd "$PYSMELL_DIR_PATH"
   # Switch to lastest commit
-  git checkout 233afebac24c910be89d065ffa661ec72458a62c || die "[ERROR] Commit '233afebac24c910be89d065ffa661ec72458a62c' not found!"
+  git checkout f5e9673a3d1b97f8376b7f3884ca0bee5545e1fd || die "[ERROR] Commit 'f5e9673a3d1b97f8376b7f3884ca0bee5545e1fd' not found!"
 popd > /dev/null 2>&1
 
 #

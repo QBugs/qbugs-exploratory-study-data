@@ -1,4 +1,4 @@
 # Tools required to run the experiments and/or the data analysis
 
-- [PySmell (233afeb)](https://github.com/chenzhifei731/Pysmell/tree/233afebac24c910be89d065ffa661ec72458a62c)
+- [PySmell](https://github.com/QBugs/PySmell)
 - [R](https://www.r-project.org)

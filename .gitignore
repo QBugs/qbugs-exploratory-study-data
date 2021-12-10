@@ -6,6 +6,7 @@ tools/*
 !tools/README.md
 !tools/get-tools.sh
 !tools/get-libraries.R
+!tools/pysmell-wrapper/
 
 # ---------------------------------------------------------------------- Windows
 

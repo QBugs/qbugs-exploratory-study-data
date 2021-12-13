@@ -19,7 +19,6 @@ OUTPUT_FILE_PATH <- args[1]
 # Load data
 DATA_FILE_PATH <- paste(this.dir(), '/../data/generated/bugs-in-quantum-computing-platforms.csv', sep='')
 df <- set_programming_languages(read.table(DATA_FILE_PATH, header=TRUE, stringsAsFactors=FALSE))
-print(head(df))
 
 unlink(OUTPUT_FILE_PATH)
 sink(OUTPUT_FILE_PATH, append=FALSE, split=TRUE)

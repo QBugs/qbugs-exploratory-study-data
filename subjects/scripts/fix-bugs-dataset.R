@@ -33,6 +33,6 @@ names(df)[names(df) == 'commit_hash'] <- 'fix_commit_hash'
 df$'project_clone_url' <- paste('https://github.com/', df$'project_full_name', '.git', sep='')
 
 # Write processed data.frame to a file
-write.table(df, file=DATA_FILE_PATH)
+write.table(df, file=DATA_FILE_PATH, append=FALSE, sep=',', row.names=FALSE)
 
 # EOF

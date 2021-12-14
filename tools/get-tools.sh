@@ -125,7 +125,7 @@ eval "$(pyenv init --path)" || die "[ERROR] Failed to init pyenv!"
 echo ""
 echo "Installing required Python versions..."
 
-# Install v3.8.0
+# Install v3.7.0
 _install_python_version_x "3" "7" "0" || die
 
 #

@@ -180,6 +180,8 @@ cd "$PYSMELL_DIR_PATH"
   pip install -r requirements.txt       || die "[ERROR] Failed to install tool's requirements!"
   # Install tool
   python setup.py install               || die "[ERROR] Failed to install the tool!"
+  # Sanity check
+  pysmell --version > /dev/null 2>&1    || die "[ERROR] Could not find/run 'pysmell --version'!"
   # Deactivate virtual environment
   deactivate                            || die "[ERROR] Failed to deactivate virtual environment!"
 popd > /dev/null 2>&1

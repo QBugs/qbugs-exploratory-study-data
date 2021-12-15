@@ -173,7 +173,7 @@ fi
 pushd . > /dev/null 2>&1
 cd "$PYSMELL_DIR_PATH"
   # Switch to lastest commit
-  git checkout d01a8082c37813644eda7efbedfcc7fcf96f4751 || die "[ERROR] Commit 'd01a8082c37813644eda7efbedfcc7fcf96f4751' not found!"
+  git checkout 9287f41d6adf7cda8e062bfe5b6edcdb761d18b0 || die "[ERROR] Commit '9287f41d6adf7cda8e062bfe5b6edcdb761d18b0' not found!"
   # Activate virtual environment
   source "$SCRIPT_DIR/env/bin/activate" || die "[ERROR] Failed to activate virtual environment!"
   # Install tool's dependencies

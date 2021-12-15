@@ -16,12 +16,10 @@ source "$SCRIPT_DIR/utils.sh" || exit 1
 
 # -------------------------------------------------------------------------- Env
 
+PYTHON_ENV_DIR="$SCRIPT_DIR/../../tools/env"
+[ -d "$PYTHON_ENV_DIR" ] || die "[ERROR] $PYTHON_ENV_DIR does not exit!"
 PYSMELL_DIR="$SCRIPT_DIR/../../tools/pysmell"
 [ -d "$PYSMELL_DIR" ] || die "[ERROR] $PYSMELL_DIR does not exit!"
-# TODO
-# Add $PYSMELL_DIR to PYTHONPATH env variable
-# Sanity check
-pysmell --version > /dev/null 2>&1 || die "[ERROR] Could not find/run 'pysmell' command!"
 
 # ------------------------------------------------------------------------- Args
 
@@ -58,9 +56,17 @@ rm -f "$OUTPUT_FILE_PATH"
 
 # ------------------------------------------------------------------------- Main
 
+# Activate virtual environment
+source "$SCRIPT_DIR/../../tools/env/bin/activate" || die "[ERROR] Failed to activate virtual environment!"
+
 echo "[DEBUG] Running PySmell on $FILE_PATH"
-pysmell --path-file "$FILE_PATH" "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to run pysmell on $FILE_PATH!"
+pysmell \
+  --py-file-to-analyze "$FILE_PATH" \
+  --output-file "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to run pysmell on $FILE_PATH!"
 [ -s "$OUTPUT_FILE_PATH" ] || die "[ERROR] $OUTPUT_FILE_PATH does not exist or it is empty!"
+
+# Deactivate virtual environment
+deactivate || die "[ERROR] Failed to deactivate virtual environment!"
 
 echo "DONE!"
 exit 0

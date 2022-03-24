@@ -53,8 +53,8 @@ rm -rf "$OUTPUT_DIR_PATH"
 
 # Clone all project's repositories into local bare repositories
 while read -r item; do
-  project_full_name=$(echo "$item" | cut -f1 -d',')
-  project_clone_url=$(echo "$item" | cut -f2 -d',')
+  project_full_name=$(echo "$item" | cut -f1 -d',' | tr -d '"')
+  project_clone_url=$(echo "$item" | cut -f2 -d',' | tr -d '"')
   # Create directory for the repository
   work_dir="$OUTPUT_DIR_PATH/$project_full_name"
   mkdir -p "$work_dir" || die "[ERROR] Failed to create $work_dir for $project_full_name!"
@@ -62,7 +62,7 @@ while read -r item; do
   git clone --bare "$project_clone_url" "$work_dir" || die "[ERROR] Failed to clone $project_clone_url to $work_dir!"
   # Runtime check
   [ -d "$work_dir" ] || die "[ERROR] $work_dir does not exist!"
-done < <(tail -n +2 "$BUGS_FILE_PATH" | cut -f3,9 -d',' | sort -u)
+done < <(tail -n +2 "$BUGS_FILE_PATH" | cut -f1,2 -d',' | sort -u)
 
 echo "DONE!"
 exit 0

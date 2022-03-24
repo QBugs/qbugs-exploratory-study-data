@@ -71,11 +71,11 @@ TMP_DIR="/tmp/$USER-$$-$(echo $RANDOM | md5sum | cut -f1 -d' ')"
 rm -rf "$TMP_DIR"; mkdir "$TMP_DIR"
 
 while read -r item; do
-             bug_id=$(echo "$item" | cut -f1 -d',')
-           bug_type=$(echo "$item" | cut -f2 -d',')
-  project_full_name=$(echo "$item" | cut -f3 -d',')
-    fix_commit_hash=$(echo "$item" | cut -f4 -d',')
+  project_full_name=$(echo "$item" | cut -f1 -d',' | tr -d '"')
+    fix_commit_hash=$(echo "$item" | cut -f3 -d',' | tr -d '"')
   buggy_commit_hash="${fix_commit_hash}^1"
+             bug_id=$(echo "$item" | cut -f4 -d',' | tr -d '"')
+           bug_type=$(echo "$item" | cut -f5 -d',' | tr -d '"')
 
   work_dir="$TMP_DIR/$project_full_name-$bug_id"
   rm -rf "$work_dir"; mkdir "$work_dir"

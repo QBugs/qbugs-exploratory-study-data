@@ -31,8 +31,8 @@ for (project_full_name in sort(unique(df$'project_full_name'))) {
   cat(project_full_name, ' & ',
       replace_string(replace_string(unique(df$'languages'[mask]), '#', '\\\\#'), ' ', ', '), ' & ',
       nrow(df[mask, ]), ' & ',
-      nrow(df[mask & df$'type' == 'Classical', ]), ' & ',
-      nrow(df[mask & df$'type' == 'Quantum', ]), ' \\\\\n', sep='')
+      nrow(df[mask & df$'bug_type' == 'Classical', ]), ' & ',
+      nrow(df[mask & df$'bug_type' == 'Quantum', ]), ' \\\\\n', sep='')
 }
 
 cat('\\bottomrule\n', sep='')

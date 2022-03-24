@@ -60,7 +60,7 @@ done
 [ -s "$BUGS_FILE_PATH" ]     || die "[ERROR] $BUGS_FILE_PATH does not exist or it is empty!"
 # Remove the output_file_path (if any) and create a new one
 rm -f "$OUTPUT_FILE_PATH"
-echo "project_full_name,buggy_commit_hash,bug_id,bug_type,buggy_file_path,buggy_line_number,buggy_component" > "$OUTPUT_FILE"
+echo "project_full_name,buggy_commit_hash,bug_id,bug_type,buggy_file_path,buggy_line_number,buggy_component" > "$OUTPUT_FILE_PATH"
 
 # ------------------------------------------------------------------------- Main
 
@@ -117,7 +117,7 @@ while read -r item; do
     while read -r buggy_components_per_buggy_line; do
       buggy_line_number=$(echo "$buggy_components_per_buggy_line" | cut -f1 -d',')
       buggy_component=$(echo "$buggy_components_per_buggy_line" | cut -f2 -d',')
-      echo "$project_full_name,$buggy_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component" >> "$OUTPUT_FILE" || die "[ERROR] Failed to append data to the $OUTPUT_FILE file!"
+      echo "$project_full_name,$buggy_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
     done < <(tail -n +2 "$tmp_buggy_components_file")
   done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-only "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
 done < <(tail -n +2 "$BUGS_FILE_PATH")
@@ -126,7 +126,7 @@ done < <(tail -n +2 "$BUGS_FILE_PATH")
 deactivate || die "[ERROR] Failed to deactivate virtual environment!"
 
 # Compress output file
-gzip -v "$OUTPUT_FILE" || die "[ERROR] Failed to compress the output file ($OUTPUT_FILE) into $OUTPUT_FILE.gz!"
+gzip -v "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to compress the output file ($OUTPUT_FILE_PATH) into $OUTPUT_FILE_PATH.gz!"
 
 echo "DONE!"
 exit 0

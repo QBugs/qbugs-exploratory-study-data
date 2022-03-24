@@ -47,7 +47,7 @@ plot_it <- function(df, label, facets=FALSE) {
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
-  p <- p + scale_y_continuous(name='', trans='log10')
+  p <- p + scale_y_continuous(name='# Occurrences', trans='log10')
   # # Use grey scale color palette
   # p <- p + scale_fill_grey()
   # Remove legend's title and increase size of [x-y]axis labels

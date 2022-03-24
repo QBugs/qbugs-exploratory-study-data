@@ -10,10 +10,18 @@
 #   [--bugs_file_path <path, e.g., ../../subjects/data/generated/bugs-in-quantum-computing-platforms.csv>]
 #   [--output_file_path <path, e.g., ../data/generated/buggy-code-data.csv>]
 #   [help]
+#
+# Requires:
+# - ../../subjects/data/generated/repositories directory must exist which is created by the ../../subjects/scripts/get-repositories.sh script
 # ------------------------------------------------------------------------------
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
 source "$SCRIPT_DIR/../../utils/scripts/utils.sh" || exit 1
+
+# -------------------------------------------------------------------------- Env
+
+# Check the projects' repositories have been cloned
+[ -d "$PROJECTS_REPOSITORIES_DIR" ] || die "[ERROR] $PROJECTS_REPOSITORIES_DIR does not exist.  Did you run $SCRIPT_DIR/../../subjects/scripts/get-repositories.sh?"
 
 # ------------------------------------------------------------------------- Args
 
@@ -77,7 +85,7 @@ while read -r item; do
 
     # Get buggy file's content
     mkdir -p $(echo "$tmp_buggy_file" | rev | cut -f2- -d'/' | rev)
-    git --git-dir="$TMP_DIR/$project_full_name" show "$buggy_commit_hash:$buggy_file_path" > "$tmp_buggy_file"
+    git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" show "$buggy_commit_hash:$buggy_file_path" > "$tmp_buggy_file"
 
     # Get lines' numbers that were buggy
     while read -r row; do
@@ -90,7 +98,7 @@ while read -r item; do
       else
         echo "$row" >> "$tmp_buggy_line_numbers_file"
       fi
-    done < <(git --git-dir="$TMP_DIR/$project_full_name" diff --no-ext-diff --binary --unified=0 "$fix_commit_hash" "$buggy_commit_hash" -- "$buggy_file_path" | grep -Po '^\+\+\+ ./\K.*|^@@ -[0-9]+(,[0-9]+)? \+\K[0-9]+(,[0-9]+)?(?= @@)' | tail -n +2)
+    done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --unified=0 "$fix_commit_hash" "$buggy_commit_hash" -- "$buggy_file_path" | grep -Po '^\+\+\+ ./\K.*|^@@ -[0-9]+(,[0-9]+)? \+\K[0-9]+(,[0-9]+)?(?= @@)' | tail -n +2)
 
     # Process buggy file and collect buggy components per buggy line of code
     python "$SCRIPT_DIR/compute-buggy-elements.py" \
@@ -105,7 +113,7 @@ while read -r item; do
       buggy_component=$(echo "$buggy_components_per_buggy_line" | cut -f2 -d',')
       echo "$project_full_name,$bug_id,$bug_type,$buggy_commit_hash,$buggy_file_path,$buggy_line_number,$buggy_component" >> "$OUTPUT_FILE" || die "[ERROR] Failed to append data to the $OUTPUT_FILE file!"
     done < <(tail -n +2 "$tmp_buggy_components_file")
-  done < <(git --git-dir="$TMP_DIR/$project_full_name" diff --no-ext-diff --binary --name-only "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
+  done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-only "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
 done < <(tail -n +2 "$BUGS_FILE_PATH")
 
 echo "DONE!"

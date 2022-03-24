@@ -26,8 +26,11 @@ df <- df[df$'real' != 'fp', ]
 df <- df[, names(df) %in% c('id', 'type', 'repo', 'commit_hash', 'component', 'symptom', 'bug_pattern', 'complexity')]
 
 # Rename columns
+names(df)[names(df) == 'id']          <- 'bug_id'
+names(df)[names(df) == 'type']        <- 'bug_type'
 names(df)[names(df) == 'repo']        <- 'project_full_name'
 names(df)[names(df) == 'commit_hash'] <- 'fix_commit_hash'
+names(df)[names(df) == 'component']   <- 'buggy_component'
 
 # Add new columns
 df$'project_clone_url' <- paste('https://github.com/', df$'project_full_name', '.git', sep='')

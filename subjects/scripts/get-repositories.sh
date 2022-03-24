@@ -21,7 +21,7 @@ if [ "$#" -ne "0" ] && [ "$#" -ne "1" ] && [ "$#" -ne "2" ] && [ "$#" -ne "4" ];
   die "$USAGE"
 fi
 
-BUGS_FILE_PATH="$SCRIPT_DIR/../data/generated/bugs-in-quantum-computing-platforms.csv"
+BUGS_FILE_PATH="$BUGS_FILE_PATH"
 OUTPUT_DIR_PATH="$PROJECTS_REPOSITORIES_DIR"
 
 while [[ "$1" = --* ]]; do

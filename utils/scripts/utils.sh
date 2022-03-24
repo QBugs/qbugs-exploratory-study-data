@@ -8,6 +8,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 PROJECTS_REPOSITORIES_DIR="$UTILS_SCRIPT_DIR/../../subjects/data/generated/repositories"
+BUGS_FILE_PATH="$UTILS_SCRIPT_DIR/../../subjects/data/generated/bugs-in-quantum-computing-platforms.csv"
 
 #
 # Print error message to the stdout and exit.

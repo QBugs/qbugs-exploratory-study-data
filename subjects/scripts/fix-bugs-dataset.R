@@ -46,7 +46,7 @@ df <- df[, c(
   'bug_pattern',
   'symptom',
   'complexity'
-])
+)]
 
 # Write processed data.frame to a file
 write.table(df, file=DATA_FILE_PATH, append=FALSE, sep=',', row.names=FALSE)

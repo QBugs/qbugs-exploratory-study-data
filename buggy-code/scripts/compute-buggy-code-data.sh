@@ -125,6 +125,9 @@ done < <(tail -n +2 "$BUGS_FILE_PATH")
 # Deactivate virtual environment
 deactivate || die "[ERROR] Failed to deactivate virtual environment!"
 
+# Compress output file
+gzip -v "$OUTPUT_FILE" || die "[ERROR] Failed to compress the output file ($OUTPUT_FILE) into $OUTPUT_FILE.gz!"
+
 echo "DONE!"
 exit 0
 

@@ -24,7 +24,7 @@ source "$SCRIPT_DIR/../../utils/scripts/utils.sh" || exit 1
 [ -d "$PROJECTS_REPOSITORIES_DIR" ] || die "[ERROR] $PROJECTS_REPOSITORIES_DIR does not exist.  Did you run $SCRIPT_DIR/../../subjects/scripts/get-repositories.sh?"
 
 PYTHON_ENV_DIR="$SCRIPT_DIR/../../tools/env"
-[ -d "$PYTHON_ENV_DIR" ] || die "[ERROR] $PYTHON_ENV_DIR does not exit!"
+[ -d "$PYTHON_ENV_DIR" ] || die "[ERROR] $PYTHON_ENV_DIR does not exit!  Did you run $SCRIPT_DIR/../../tools/get-tools.sh?"
 
 # ------------------------------------------------------------------------- Args
 

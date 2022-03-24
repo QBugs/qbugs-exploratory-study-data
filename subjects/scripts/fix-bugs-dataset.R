@@ -35,6 +35,9 @@ names(df)[names(df) == 'component']   <- 'high_level_buggy_component'
 # Add new columns
 df$'project_repository_url' <- paste('https://github.com/', df$'project_full_name', '.git', sep='')
 
+# Re-order columns
+df <- select(df, project_full_name, project_repository_url, fix_commit_hash, bug_id, bug_type, high_level_buggy_component, bug_pattern, symptom, complexity)
+
 # Write processed data.frame to a file
 write.table(df, file=DATA_FILE_PATH, append=FALSE, sep=',', row.names=FALSE)
 

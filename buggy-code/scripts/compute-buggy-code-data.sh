@@ -91,7 +91,8 @@ while read -r item; do
 
     # Get buggy file's content
     mkdir -p $(echo "$tmp_buggy_file" | rev | cut -f2- -d'/' | rev)
-    git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" show "$buggy_commit_hash:$buggy_file_path" > "$tmp_buggy_file"
+    git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" show "$buggy_commit_hash:$buggy_file_path" > "$tmp_buggy_file" || die "[ERROR] Failed to collect $buggy_file_path from the buggy commit $buggy_commit_hash!"
+    [ -s "$tmp_buggy_file" ] || die "[ERROR] $tmp_buggy_file does not exist or it is empty!"
 
     # Get lines' numbers that were buggy
     while read -r row; do

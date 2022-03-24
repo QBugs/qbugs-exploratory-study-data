@@ -30,10 +30,10 @@ names(df)[names(df) == 'id']          <- 'bug_id'
 names(df)[names(df) == 'type']        <- 'bug_type'
 names(df)[names(df) == 'repo']        <- 'project_full_name'
 names(df)[names(df) == 'commit_hash'] <- 'fix_commit_hash'
-names(df)[names(df) == 'component']   <- 'buggy_component'
+names(df)[names(df) == 'component']   <- 'high_level_buggy_component'
 
 # Add new columns
-df$'project_clone_url' <- paste('https://github.com/', df$'project_full_name', '.git', sep='')
+df$'project_repository_url' <- paste('https://github.com/', df$'project_full_name', '.git', sep='')
 
 # Write processed data.frame to a file
 write.table(df, file=DATA_FILE_PATH, append=FALSE, sep=',', row.names=FALSE)

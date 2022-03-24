@@ -11,13 +11,13 @@
 - `project_full_name`: Full name of a GitHub project, i.e., organization + "/" + project-name
   * factor: e.g., "Qiskit/qiskit-aer"
 
-- `project_clone_url`: URL to the project's repository
+- `project_repository_url`: URL to the project's repository
   * factor: e.g., "https://github.com/Qiskit/qiskit-aer.git"
 
 - `fix_commit_hash`: Fix commit's hash
   * factor: e.g., "48498dd0edc4e1ed1ee4bb287edd89541af104b2"
 
-- `buggy_component`: Abstract buggy component involved in the fix
+- `high_level_buggy_component`: Abstract buggy component involved in the fix
   * factor: e.g., "Quantum Abstractions, Simulator"
 
 - `symptom`: Brief description of bug's symptom

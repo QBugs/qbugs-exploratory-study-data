@@ -1,4 +1,4 @@
-"bug_id","bug_type","project_full_name","fix_commit_hash","buggy_component","symptom","bug_pattern","complexity","project_clone_url"
+"bug_id","bug_type","project_full_name","fix_commit_hash","high_level_buggy_component","symptom","bug_pattern","complexity","project_repository_url"
 "1","Classical","Qiskit/qiskit-ignis","ec1b4ce759f1fb8ba0242dd6c4a309fa1b586666","Quantum State Evaluation","Crash - OS/PL Error, Crash","Missing Error Handling","19","https://github.com/Qiskit/qiskit-ignis.git"
 "10","Quantum","Qiskit/qiskit-ignis","e696fee3e52550f50fb240a4c6356c61c9f01725","Quantum State Evaluation","Incorrect Output","Incorrect Numerical Computation","2","https://github.com/Qiskit/qiskit-ignis.git"
 "1010","Quantum","Qiskit/qiskit-aer","dc7a2413e6c373455c00cff51e37eaaa17a4a7ac","Optimizations","Crash - Application Error, Crash","Barrier Related","6","https://github.com/Qiskit/qiskit-aer.git"

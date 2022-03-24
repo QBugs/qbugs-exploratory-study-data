@@ -119,7 +119,7 @@ while read -r item; do
       buggy_component=$(echo "$buggy_components_per_buggy_line" | cut -f2 -d',')
       echo "$project_full_name,$buggy_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
     done < <(tail -n +2 "$tmp_buggy_components_file")
-  done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-only "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
+  done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-only --diff-filter=CDMRT "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
 done < <(tail -n +2 "$BUGS_FILE_PATH")
 
 # Deactivate virtual environment

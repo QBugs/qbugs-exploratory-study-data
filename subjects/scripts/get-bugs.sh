@@ -21,7 +21,7 @@ if [ "$#" -ne "0" ] && [ "$#" -ne "1" ] && [ "$#" -ne "2" ]; then
   die "$USAGE"
 fi
 
-OUTPUT_FILE_PATH="../data/generated/bugs-in-quantum-computing-platforms.csv"
+OUTPUT_FILE_PATH="$SCRIPT_DIR/../data/generated/bugs-in-quantum-computing-platforms.csv"
 
 while [[ "$1" = --* ]]; do
   OPTION=$1; shift

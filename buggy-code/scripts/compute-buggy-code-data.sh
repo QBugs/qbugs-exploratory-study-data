@@ -78,7 +78,7 @@ while read -r item; do
            bug_type=$(echo "$item" | cut -f5 -d',' | tr -d '"')
 
   work_dir="$TMP_DIR/$project_full_name-$bug_id"
-  rm -rf "$work_dir"; mkdir "$work_dir"
+  rm -rf "$work_dir"; mkdir -p "$work_dir"
 
   # Get list of buggy .py files and process each one
   while read -r buggy_file_path; do

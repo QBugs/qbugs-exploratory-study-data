@@ -23,4 +23,4 @@
 - `buggy_component`: buggy comment in `buggy_line_number` as described in the [Python's AST](https://docs.python.org/3/library/ast.html) documentation
   * factor, e.g., "Call", "Assignment", etc
 
-Note that the same `buggy_line_number` in the same `buggy_file_path` of a `project`-`bug_id` bug could have more than one `buggy_component`.
+Note that the same `buggy_line_number` in the same `buggy_file_path` of a `project_full_name`-`bug_id` bug could have more than one `buggy_component`.

@@ -23,6 +23,9 @@ source "$SCRIPT_DIR/../../utils/scripts/utils.sh" || exit 1
 # Check the projects' repositories have been cloned
 [ -d "$PROJECTS_REPOSITORIES_DIR" ] || die "[ERROR] $PROJECTS_REPOSITORIES_DIR does not exist.  Did you run $SCRIPT_DIR/../../subjects/scripts/get-repositories.sh?"
 
+PYTHON_ENV_DIR="$SCRIPT_DIR/../../tools/env"
+[ -d "$PYTHON_ENV_DIR" ] || die "[ERROR] $PYTHON_ENV_DIR does not exit!"
+
 # ------------------------------------------------------------------------- Args
 
 USAGE="Usage: ${BASH_SOURCE[0]} [--bugs_file_path <path, e.g., ../../subjects/data/generated/bugs-in-quantum-computing-platforms.csv>] [--output_file_path <path, e.g., ../data/generated/buggy-code-data.csv> [help]"
@@ -60,6 +63,9 @@ rm -f "$OUTPUT_FILE_PATH"
 echo "project_full_name,bug_id,bug_type,buggy_commit_hash,buggy_file_path,buggy_line_number,buggy_component" > "$OUTPUT_FILE"
 
 # ------------------------------------------------------------------------- Main
+
+# Activate python virtual environment
+source "$SCRIPT_DIR/../../tools/env/bin/activate" || die "[ERROR] Failed to activate virtual environment!"
 
 TMP_DIR="/tmp/$USER-$$-$(echo $RANDOM | md5sum | cut -f1 -d' ')"
 rm -rf "$TMP_DIR"; mkdir "$TMP_DIR"
@@ -115,6 +121,9 @@ while read -r item; do
     done < <(tail -n +2 "$tmp_buggy_components_file")
   done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-only "$buggy_commit_hash" "$fix_commit_hash" | grep ".py$")
 done < <(tail -n +2 "$BUGS_FILE_PATH")
+
+# Deactivate virtual environment
+deactivate || die "[ERROR] Failed to deactivate virtual environment!"
 
 echo "DONE!"
 exit 0

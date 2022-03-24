@@ -22,10 +22,7 @@ if [ "$#" -ne "1" ] && [ "$#" -ne "2" ] && [ "$#" -ne "4" ]; then
   die "$USAGE"
 fi
 
-# "id","type","project_full_name","fix_commit_hash","component","symptom","bug_pattern","complexity","project_clone_url"
-# e.g.,
-# "1","Classical","Qiskit/qiskit-ignis","ec1b4ce759f1fb8ba0242dd6c4a309fa1b586666","Quantum State Evaluation","Crash - OS/PL Error, Crash","Missing Error Handling","19","https://github.com/Qiskit/qiskit-ignis.git"
-BUGS_FILE_PATH="$SCRIPT_DIR/../../subjects/data/generated/bugs-in-quantum-computing-platforms.csv"
+BUGS_FILE_PATH="$BUGS_FILE_PATH"
 OUTPUT_DIR_PATH=""
 
 while [[ "$1" = --* ]]; do
@@ -64,15 +61,15 @@ jobs_file="$TMP_DIR/gnu-parallel-jobs.txt"
 rm -f "$jobs_file"
 
 while read -r row; do
-  project_full_name=$(echo "$row" | cut -f3 -d',' | tr -d '"')
-  project_clone_url=$(echo "$row" | cut -f9 -d',' | tr -d '"')
-    fix_commit_hash=$(echo "$row" | cut -f4 -d',' | tr -d '"')
+       project_full_name=$(echo "$row" | cut -f1 -d',' | tr -d '"')
+  project_repository_url=$(echo "$row" | cut -f2 -d',' | tr -d '"')
+         fix_commit_hash=$(echo "$row" | cut -f3 -d',' | tr -d '"')
 
   project_repository_dir_path="$TMP_DIR/$project_full_name"
   mkdir -p "$project_repository_dir_path"
 
   # Get project
-  git clone "$project_clone_url" "$project_repository_dir_path" || die "[ERROR] Failed to clone $project_full_name to $project_repository_dir_path!"
+  git clone "$project_repository_url" "$project_repository_dir_path" || die "[ERROR] Failed to clone $project_full_name to $project_repository_dir_path!"
 
   # Get buggy version
   pushd . > /dev/null 2>&1

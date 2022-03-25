@@ -31,10 +31,7 @@ OUTPUT_FILE <- args[2]
 df <- load_CSV(INPUT_FILE)
 
 # Aggregate data
-df$'count' <- 1
-df <- aggregate(formula=count ~ bug_id + bug_type + buggy_component, data=df, FUN=sum)
-df$'count' <- 1
-df <- aggregate(formula=count ~ bug_type + buggy_component, data=df, FUN=sum)
+df <- aggregate(formula=. ~ bug_id + bug_type + buggy_component, data=df, FUN=length)
 
 # Remove the output file if any
 unlink(OUTPUT_FILE)
@@ -50,11 +47,7 @@ for (buggy_component in sort(unique(df$'buggy_component'))) {
   cat(buggy_component, sep='')
   # Per bug type
   for (bug_type in c('Classical', 'Quantum')) {
-    if (nrow(df[df$'buggy_component' == buggy_component & df$'bug_type' == bug_type, ]) == 0) {
-      count <- 0
-    } else {
-      count <- df$'count'[df$'buggy_component' == buggy_component & df$'bug_type' == bug_type]
-    }
+    count <- nrow(df[df$'buggy_component' == buggy_component & df$'bug_type' == bug_type, ])
     cat(' & ', count, sep='')
   }
   # New line

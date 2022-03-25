@@ -35,27 +35,34 @@ agg_count <- aggregate(formula=count ~ project_full_name + bug_id + bug_type + b
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)
-pdf(file=OUTPUT_FILE, family='Helvetica', width=12, height=8)
+pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=9)
 # Add a cover page to the output file
 plot_label('Distributions as boxplot')
 
-plot_it <- function(df, label, facets=FALSE) {
+plot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   # Identify plot
   plot_label(label)
   # Basic boxplot
-  p <- ggplot(df, aes(x=buggy_component, y=count), fill=buggy_component) + geom_boxplot(width=0.25)
+  if (fill) {
+    p <- ggplot(df, aes(x=buggy_component, y=count, fill=bug_type))
+  } else {
+    p <- ggplot(df, aes(x=buggy_component, y=count))
+  }
+  p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
   p <- p + scale_y_continuous(name='# Occurrences (log10)', trans='log10')
-  # # Use grey scale color palette
-  # p <- p + scale_fill_grey()
+  # Use grey scale color palette
+  if (fill) {
+    p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+  }
   # Remove legend's title and increase size of [x-y]axis labels
-  p <- p + theme(legend.position='none',
-    axis.text.x=element_text(size=12,  hjust=0.75, vjust=0.5),
-    axis.text.y=element_text(size=12,  hjust=1.0, vjust=0.0),
-    axis.title.x=element_text(size=15, hjust=0.5, vjust=0.0),
-    axis.title.y=element_text(size=15, hjust=0.5, vjust=0.5)
+  p <- p + theme(legend.position='top',
+    axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
+    axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),
+    axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
+    axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
   )
   # Make it horizontal
   p <- p + coord_flip()
@@ -69,10 +76,11 @@ plot_it <- function(df, label, facets=FALSE) {
   print(p)
 }
 
-plot_it(agg_count, 'Overall', FALSE)
-plot_it(agg_count, 'Classical and Quantum bugs', TRUE)
-plot_it(agg_count[agg_count$'bug_type' == 'Classical', ], 'Classical bugs', FALSE)
-plot_it(agg_count[agg_count$'bug_type' == 'Quantum', ], 'Quantum bugs', FALSE)
+plot_it(agg_count, 'Overall', facets=FALSE, fill=FALSE)
+plot_it(agg_count, 'Classical and Quantum bugs (same plot)', facets=FALSE, fill=TRUE)
+plot_it(agg_count, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE)
+plot_it(agg_count[agg_count$'bug_type' == 'Classical', ], 'Classical bugs', facets=FALSE, fill=FALSE)
+plot_it(agg_count[agg_count$'bug_type' == 'Quantum', ], 'Quantum bugs', facets=FALSE, fill=FALSE)
 
 # Close output file
 dev.off()

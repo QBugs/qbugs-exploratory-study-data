@@ -66,7 +66,7 @@ with open(buggy_file, 'r') as f:
 with open(output_file, 'w') as f:
   f.write('buggy_line_number,buggy_component\n')
   for buggy_line_number in sorted(buggy_components.keys()):
-    for buggy_component in buggy_components[buggy_line_number]:
+    for buggy_component in sorted(buggy_components[buggy_line_number]):
       f.write('%d,%s\n' %(buggy_line_number, buggy_component))
   f.close()
 

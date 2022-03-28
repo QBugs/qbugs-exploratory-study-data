@@ -27,7 +27,6 @@ import argparse
 import ast
 import os
 import pathlib
-import re
 import sys
 
 # ------------------------------------------------------------------------- Args
@@ -60,9 +59,7 @@ with open(buggy_file, 'r') as f:
       if start_line_number in buggy_line_numbers:
         if start_line_number not in buggy_components:
             buggy_components[start_line_number] = set()
-        node_type = str(type(node))
-        node_simple_name = re.findall(r"_ast.(.*)'", node_type)[0]
-        buggy_components[start_line_number].add(node_simple_name)
+        buggy_components[start_line_number].add(type(node).__name__)
   f.close()
 
 # Write set of buggy line numbers and correspondent buggy components to the output file

@@ -82,7 +82,7 @@ while read -r item; do
 
   # Get list of buggy .py files and process each one
   while read -r buggy_file_path; do
-    echo "[DEBUG] $buggy_file_path in $buggy_commit_hash..$fix_commit_hash"
+    echo "[DEBUG] $buggy_file_path in $buggy_commit_hash..$fix_commit_hash ($project_full_name::$bug_id)"
 
     tmp_buggy_file="$work_dir/$buggy_file_path"
     tmp_buggy_line_numbers_file="$tmp_buggy_file.buggy-line-numbers"

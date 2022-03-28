@@ -72,14 +72,21 @@ while read -r item; do
   buggy_line_number=$(echo "$item" | cut -f7 -d',' | tr -d '"')
     buggy_component=$(echo "$item" | cut -f8 -d',' | tr -d '"')
 
-  while read -r row; do
-           commit_hash=$(echo "$row" | cut -f1 -d',') # full commit hash
-           author_name=$(echo "$row" | cut -f2 -d',') # author name
-    author_commit_date=$(echo "$row" | cut -f3 -d',') # UNIX timestamp
+  echo "[DEBUG] $project_full_name :: $bug_id :: $buggy_file_path :: $buggy_line_number :: $buggy_component"
 
-    echo "$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,$commit_hash,$author_name,$author_commit_date" >> "$OUTPUT_FILE_PATH"
+  # Get UNIX timestamp of the fixed commit first without looking at the buggy
+  # line number as it might not no longer exist on the fixed version
+  git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" log \
+    "$fix_commit_hash" \
+    --pretty=format:"%H,%an,%at" \
+    --no-patch -- "$buggy_file_path" | head -n1 | sed "s|^|$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,|g" >> "$OUTPUT_FILE_PATH"
 
-  done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" log -L"$buggy_line_number,$buggy_line_number":"$buggy_file_path" "$fix_commit_hash" --pretty=format:"%H,%an,%at" --no-patch)
+  # Get UNIX timestamp of all commits except the fixed commit
+  git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" log \
+    -L"$buggy_line_number,$buggy_line_number":"$buggy_file_path" \
+    "$fix_commit_hash^1" \
+    --pretty=format:"%H,%an,%at" \
+    --no-patch | sed "s|^|$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,|g" >> "$OUTPUT_FILE_PATH"
 
 done < <(tail -n +2 "$BUGGY_CODE_DATA_PATH")
 

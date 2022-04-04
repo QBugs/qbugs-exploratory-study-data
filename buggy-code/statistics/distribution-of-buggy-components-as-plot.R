@@ -2,9 +2,9 @@
 # This script plots the distribution of buggy components as boxplot.
 #
 # Usage:
-#   Rscript distribution-as-plot.R
+#   Rscript distribution-of-buggy-components-as-plot.R
 #     <input data file, e.g., ../data/generated/buggy-code-data.csv>
-#     <output pdf file, e.g., distribution-as-plot.pdf>
+#     <output pdf file, e.g., distribution-of-buggy-components-as-plot.pdf>
 # ------------------------------------------------------------------------------
 
 source('../../utils/statistics/util.R')
@@ -17,7 +17,7 @@ library('reshape2')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
-  stop('USAGE: Rscript distribution-as-plot.R <input data file, e.g., ../data/generated/buggy-code-data.csv> <output pdf file, e.g., distribution-as-plot.pdf>')
+  stop('USAGE: Rscript distribution-of-buggy-components-as-plot.R <input data file, e.g., ../data/generated/buggy-code-data.csv> <output pdf file, e.g., distribution-of-buggy-components-as-plot.pdf>')
 }
 
 # Args

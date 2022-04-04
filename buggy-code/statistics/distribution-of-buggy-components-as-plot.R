@@ -63,7 +63,7 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   if (fill) {
     p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
   }
-  # Remove legend's title and increase size of [x-y]axis labels
+  # Move legend's title to the top and increase size of [x-y]axis labels
   p <- p + theme(legend.position='top',
     axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
     axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),

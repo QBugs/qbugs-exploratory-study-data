@@ -12,6 +12,8 @@ source('../../utils/statistics/util.R')
 # Load external packages
 library('ggplot2')
 library('reshape2')
+library('nortest')
+library('effsize')
 
 # ------------------------------------------------------------------------- Args
 
@@ -111,6 +113,118 @@ p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), p
 p <- p + coord_flip()
 # Print it
 print(p)
+
+#
+# Perform statistical analysis
+#
+
+plot_label('Statistical analysis')
+
+# Check for normality, as histogram plots
+plot_label('Check for normality, as histogram plots')
+plot_label('Histogram (overall)')
+ggplot(agg_count, aes(x=count)) + geom_histogram()
+hist(agg_count$'count', breaks=100)
+plot_label('Histogram (per bug type)')
+ggplot(agg_count, aes(x=count))+ geom_histogram() + facet_grid(bug_type ~ .)
+hist(agg_count$'count'[agg_count$'bug_type' == 'Classical'], breaks=100)
+hist(agg_count$'count'[agg_count$'bug_type' == 'Quantum'], breaks=100)
+
+# Check for normality, as Quantile-Quantile plots
+plot_label('Check for normality, as Quantile-Quantile plots')
+plot_label('Quantile-Quantile (overall)')
+qqnorm(agg_count$'count')
+qqline(agg_count$'count', col='red')
+plot_label('Quantile-Quantile (classical)')
+qqnorm(agg_count$'count'[agg_count$'bug_type' == 'Classical'])
+qqline(agg_count$'count'[agg_count$'bug_type' == 'Classical'], col='red')
+plot_label('Quantile-Quantile (quantum)')
+qqnorm(agg_count$'count'[agg_count$'bug_type' == 'Quantum'])
+qqline(agg_count$'count'[agg_count$'bug_type' == 'Quantum'], col='red')
+
+# Check for normality, as Shapiro-Wilk's test
+plot_label('Check for normality, as Shapiro-Wilk test')
+
+x <- shapiro.test(agg_count$'count')
+plot_label(paste(
+  'Shapiro-Wilk test (overall)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+x <- shapiro.test(agg_count$'count'[agg_count$'bug_type' == 'Classical'])
+plot_label(paste(
+  'Shapiro-Wilk test (classical)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+x <- shapiro.test(agg_count$'count'[agg_count$'bug_type' == 'Quantum'])
+plot_label(paste(
+  'Shapiro-Wilk test (quantum)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+# Check for normality, as Anderson-Darling's test
+plot_label('Check for normality, as Anderson-Darling test')
+
+x <- ad.test(agg_count$'count')
+plot_label(paste(
+  'Anderson-Darling test (overall)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+x <- ad.test(agg_count$'count'[agg_count$'bug_type' == 'Classical'])
+plot_label(paste(
+  'Anderson-Darling test (classical)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+x <- ad.test(agg_count$'count'[agg_count$'bug_type' == 'Quantum'])
+plot_label(paste(
+  'Anderson-Darling test (quantum)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'w: ', x$'statistic',
+  sep=''))
+
+# Kruskal-Wallis non-parametric test
+x <- kruskal.test(bug_type ~ count, data=agg_count)
+plot_label(paste(
+  'Kruskal-Wallis non-parametric test (overall)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'df: ', x$'parameter',
+  '\n', 'chi-squared: ', x$'statistic',
+  sep=''))
+
+# Cohen's d effect size
+x <- cohen.d(agg_count$'count'[agg_count$'bug_type' == 'Classical'], agg_count$'count'[agg_count$'bug_type' == 'Quantum'], paired=FALSE, conf.level=0.99)
+plot_label(paste(
+  'Cohen\'s d effect size',
+  '\n', 'estimate: ', x$'estimate',
+  '\n', 'magnitude: ', x$'magnitude',
+  '\n', 'conf.int (lower): ', x$'conf.int'[1],
+  '\n', 'conf.int (upper): ', x$'conf.int'[2],
+  '\n', 'conf.level: ', x$'conf.level',
+  sep=''))
+
+x <- kruskal.test(buggy_component ~ count, data=agg_count[agg_count$'bug_type' == 'Classical', ])
+plot_label(paste(
+  'Kruskal-Wallis non-parametric test (classical)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'df: ', x$'parameter',
+  '\n', 'chi-squared: ', x$'statistic',
+  sep=''))
+
+x <- kruskal.test(buggy_component ~ count, data=agg_count[agg_count$'bug_type' == 'Quantum', ])
+plot_label(paste(
+  'Kruskal-Wallis non-parametric test (quantum)',
+  '\n', 'p-value: ', x$'p.value',
+  '\n', 'df: ', x$'parameter',
+  '\n', 'chi-squared: ', x$'statistic',
+  sep=''))
 
 # Close output file
 dev.off()

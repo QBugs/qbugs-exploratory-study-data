@@ -56,7 +56,7 @@ done
 [ "$BUGGY_CODE_DATA_PATH" != "" ]  || die "[ERROR] Missing --buggy_code_data_path argument!"
 [ "$OUTPUT_FILE_PATH" != "" ]      || die "[ERROR] Missing --output_file_path argument!"
 # Check whether all arguments exist
-[ -s "$BUGGY_CODE_DATA_PATH" ]     || die "[ERROR] $BUGS_FILE_PATH does not exist or it is empty!"
+[ -s "$BUGGY_CODE_DATA_PATH" ]     || die "[ERROR] $BUGGY_CODE_DATA_PATH does not exist or it is empty!"
 # Remove the output_file_path (if any) and create a new one
 rm -f "$OUTPUT_FILE_PATH"
 echo "project_full_name,fix_commit_hash,bug_id,bug_type,buggy_file_path,buggy_line_number,buggy_component,commit_hash,author_name,author_commit_date" > "$OUTPUT_FILE_PATH"

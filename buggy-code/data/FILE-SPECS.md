@@ -59,3 +59,38 @@ Note that the same `buggy_line_number` in the same `buggy_file_path` of a `proje
 
 - `author_commit_date`: UNIX timestamp when the buggy line was modified
   * numerical, e.g., 1530290738
+
+## [code-lifetime-data.csv](generated/code-lifetime-data.csv)
+
+- `project_full_name`: Full name of a GitHub project, i.e., organization + "/" + project-name
+  * factor, e.g., "Qiskit/qiskit-ignis"
+
+- `fix_commit_hash`: git commit hash of the fixed source code
+  * factor, e.g., "ec1b4ce759f1fb8ba0242dd6c4a309fa1b586666"
+
+- `bug_id`: Bug id as original identified in the [Bugs in Quantum Computing Platforms: An Empirical Study](https://arxiv.org/abs/2110.14560)
+  * factor: e.g., "1", "1909-5"
+
+- `bug_type`: bug type
+  * factor: "Classical" or "Quantum"
+
+- `file_path`: relative path of the buggy file
+  * factor, e.g., "qiskit_ignis/tomography/fitters/cvx_fit.py"
+
+- `line_number`: line number of a buggy line
+  * numerical
+
+- `commit_hash`: git commit hash of the commit that has modified the buggy line
+  * factor, e.g., "9616ec4c4dae881437377f89196672a00d243844"
+
+- `commit_message`: raw commit message, i.e., subject and body (if any)
+  * factor, e.g., "changed reference order"
+
+- `author_name`: name of the developer that has modified the buggy line
+  * factor, e.g., cjwood
+
+- `author_commit_date`: UNIX timestamp when the buggy line was modified
+  * numerical, e.g., 1530290738
+
+- `bug_fix`: whether `commit_hash` is considered a bug-fix commit
+  * numerical: 1 if `commit_hash` is considered a bug-fix commit, 0 otherwise.  A `commit_hash` is considered a bug-fix commit if and only if the commit message matches the following regex expression `fix(e[ds])?|bugs?|defects?|patch|corrigidos?|close([sd])?|resolve([sd])?`.  In other words, if any of the following keywords "fix", "fixed", "fixes", "bugs", "defects", "patch", "corrigidos", "close", "closed", "closes", "resolve", "resolved", "resolves" occurs in the commit's message.  Additionally, commits with a message that contains any of the keywords "refactor", "typo", "requirement", "import", and "style" are not considered bug-fix commits as such commits often are not about bugs but other code improvements, as suggested in the paper [Bugs in Quantum Computing Platforms: An Empirical Study](https://arxiv.org/abs/2110.14560).

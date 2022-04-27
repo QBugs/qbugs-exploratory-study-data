@@ -7,7 +7,7 @@
 # line has been modified.
 #
 # Usage:
-# compute-lifetime-buggy-code-data.sh.sh
+# compute-lifetime-buggy-code-data.sh
 #   [--buggy_code_data_path <path, e.g., ../data/generated/buggy-code-data.csv>]
 #   [--output_file_path <path, e.g., ../data/generated/buggy-code-lifetime-data.csv>]
 #   [help]

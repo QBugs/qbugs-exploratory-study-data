@@ -89,7 +89,7 @@ cd "$work_dir"
   echo "commit_hash,commit_message,author_name,author_commit_date,bug_fix" > "$commits_file_path"
   while read -r commit_hash; do
     commit_message=$(git show "$commit_hash" --pretty=format:"%B" --no-patch | sed ':a;N;$!ba;s/\n/ /g' | sed 's|,||g' | dos2unix)
-    echo "[DEBUG] $project_full_name :: $bug_id :: $file_path :: $line_number :: $commit_hash :: $commit_message"
+    echo "[DEBUG] $project_full_name :: $bug_id :: $commit_hash :: $commit_message"
 
     # Is it a bug-fix commit?
     bug_fix=0
@@ -98,7 +98,7 @@ cd "$work_dir"
     elif echo "$commit_message" | grep -Eq "fix(e[ds])?|bugs?|defects?|patch|corrigidos?|close([sd])?|resolve([sd])?"; then
       bug_fix=1
     fi
-    echo "[DEBUG] $project_full_name :: $bug_id :: $file_path :: $line_number :: $commit_hash $bug_fix"
+    echo "[DEBUG] $project_full_name :: $bug_id :: $commit_hash $bug_fix"
 
     author_data=$(git show "$commit_hash" --pretty=format:"%an,%at" --no-patch)
     author_name=$(echo "$author_data" | cut -f1 -d',')

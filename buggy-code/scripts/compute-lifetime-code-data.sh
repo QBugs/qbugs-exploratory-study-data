@@ -85,8 +85,6 @@ while read -r bug_id; do
   grep -q "^DONE\!$" "$jobs_dir_path/$bug_id.log" || die "[ERROR] Failed to run compute-lifetime-code-data-on-a-bug.sh on $bug_id!"
   # Sanity check CSV file
   [ -s "$jobs_dir_path/$bug_id.csv" ] || die "[ERROR] $jobs_dir_path/$bug_id.csv does not exist or it is empty!"
-  num_rows=$(wc -l "$jobs_dir_path/$bug_id.csv" | cut -f1 -d' ')
-  [ "$num_rows" -ge "2" ] || die "[ERROR] $jobs_dir_path/$bug_id.csv only has $num_rows rows when at least two are expected!"
   # Aggregate data
   tail -n +2 "$jobs_dir_path/$bug_id.csv" >> "$OUTPUT_FILE_PATH"
 done < <(tail -n +2 "$BUGS_FILE_PATH" | shuf | cut -f4 -d',' | tr -d '"')

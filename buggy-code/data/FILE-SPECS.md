@@ -121,5 +121,11 @@ File manually created by the following procedure:
 - `fix_timestamp`: UNIX timestamp of the fixed commit
   * numerical, e.g., 1521564737
 
+- `issue_url`: URL to the correspondent GitHub issue
+  * factor, e.g., "https://github.com/dwavesystems/dwave-system/issues/16"
+
+- `issue_date`: Creation date of the correspondent GitHub issue
+  * factor, e.g., "2020-04-20T14:26:40Z"
+
 - `issue_timestamp`: UNIX timestamp of the correspondent GitHub issue
   * numerical, e.g., 1521072000

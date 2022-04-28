@@ -79,7 +79,7 @@ while read -r item; do
   data=$(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" show \
     "$fix_commit_hash" \
     --pretty=format:"%H,%an,%at" \
-    --no-patch "$buggy_file_path" | sed "s|^|$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,|g")
+    --no-patch | sed "s|^|$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,|g")
   echo "$data" >> "$OUTPUT_FILE_PATH"
 
   # Get UNIX timestamp of all commits except the fixed commit

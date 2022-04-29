@@ -21,7 +21,6 @@ xanaduai/strawberryfields,6fd7aaa2332eb2d283034b03984acaeb06e785ac,1860,Classica
 rigetti/pyquil,b6ef90d22065c0b9c87788477a04f8b38f56c2eb,1928,Classical,1498501107,https://github.com/rigetti/pyquil/pull/55,2017-06-21T16:38:00Z,1498063080
 rigetti/pyquil,b9f050c6e33a036c10d6f984c3f0b0f29836d2e0,2004,Classical,1569108876,https://github.com/rigetti/pyquil/issues/815,2019-03-01T02:02:15Z,1551405735
 rigetti/pyquil,279a29b432a6c12d013b26201fc53410fca4f48d,2018,Classical,1611594298,https://github.com/rigetti/pyquil/issues/1295,2021-01-25T16:06:49Z,1611590809
-dwavesystems/dwave-system,38629d04e0e33a3a2c69ff5c85938aed49356ce1,2033,Classical,1518541763,https://github.com/dwavesystems/dwave-system/issues/16,2018-03-06T18:29:41Z,1520360981
 dwavesystems/dwave-system,e8a1fefc86f560799ded9dfc19b54e70964db17b,2052,Classical,1569604126,https://github.com/dwavesystems/dwave-system/pull/230,2019-09-27T16:50:13Z,1569603013
 dwavesystems/dwave-system,91a5b5ccd746906b701fe22adca0bd5716f79a47,2064,Classical,1608227067,https://github.com/dwavesystems/dwave-system/issues/372,2020-12-10T19:52:47Z,1607629967
 dwavesystems/dwave-system,00fa6703c7e550314e5ea171ca4c10d15282079c,2067,Classical,1631194837,https://github.com/dwavesystems/dwave-system/issues/363,2020-10-29T10:55:55Z,1603968955

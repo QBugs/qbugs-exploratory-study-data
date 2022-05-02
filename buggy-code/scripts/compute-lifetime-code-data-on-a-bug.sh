@@ -60,7 +60,7 @@ done
 [ "$OUTPUT_FILE_PATH" != "" ] || die "[ERROR] Missing --output_file_path argument!"
 
 # Remove the output_file_path (if any) and create a new one
-echo "project_full_name,fix_commit_hash,bug_id,bug_type,file_path,line_number,commit_hash,commit_message,author_name,author_commit_date,bug_fix" > "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to create $OUTPUT_FILE_PATH file!"
+echo "project_full_name,fix_commit_hash,bug_id,bug_type,file_path,line_number,commit_hash,author_name,author_commit_date,bug_fix" > "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to create $OUTPUT_FILE_PATH file!"
 
 # ------------------------------------------------------------------------- Main
 
@@ -86,7 +86,7 @@ cd "$work_dir"
 
   # Collect all bug-fixing commits
   commits_file_path="$work_dir/commits.txt"
-  echo "commit_hash,commit_message,author_name,author_commit_date,bug_fix" > "$commits_file_path"
+  echo "commit_hash,author_name,author_commit_date,bug_fix" > "$commits_file_path"
   while read -r commit_hash; do
     commit_message=$(git show "$commit_hash" --pretty=format:"%B" --no-patch | sed ':a;N;$!ba;s/\n/ /g' | sed 's|,||g' | dos2unix)
     echo "[DEBUG] $project_full_name :: $bug_id :: $commit_hash :: $commit_message"
@@ -104,7 +104,7 @@ cd "$work_dir"
     author_name=$(echo "$author_data" | cut -f1 -d',')
     author_commit_date=$(echo "$author_data" | cut -f2 -d',')
 
-    echo "$commit_hash,$commit_message,$author_name,$author_commit_date,$bug_fix" >> "$commits_file_path"
+    echo "$commit_hash,$author_name,$author_commit_date,$bug_fix" >> "$commits_file_path"
   done < <(git log --pretty=format:"%H" --no-patch | sed -e '$a\')
 
   # Collect metadata per .py file, per line

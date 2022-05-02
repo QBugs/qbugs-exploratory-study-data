@@ -93,9 +93,9 @@ cd "$work_dir"
 
     # Is it a bug-fix commit?
     bug_fix=0
-    if echo "$commit_message" | grep -Eq "refactor|typo|requirement|import|style"; then
+    if echo "$commit_message" | grep -Eiq "refactor|typo|requirement|import|style"; then
       bug_fix=0
-    elif echo "$commit_message" | grep -Eq "fix(e[ds])?|bugs?|defects?|patch|corrigidos?|close([sd])?|resolve([sd])?"; then
+    elif echo "$commit_message" | grep -Eiq "fix(e[ds])?|bugs?|defects?|patch|corrigidos?|close([sd])?|resolve([sd])?" | grep -vi "debug"; then
       bug_fix=1
     fi
     echo "[DEBUG] $project_full_name :: $bug_id :: $commit_hash $bug_fix"

@@ -73,7 +73,7 @@ for (bug_id in unique(df$'bug_id')) {
   }
 }
 
-agg_mean <- aggregate(formula=. ~ bug_id + bug_type + buggy_component, data=df_proc, FUN=mean)
+agg_mean <- aggregate(x=. ~ bug_id + bug_type + buggy_component, data=df_proc, FUN=mean)
 print(head(agg_mean)) # Debug
 
 # Reshape data

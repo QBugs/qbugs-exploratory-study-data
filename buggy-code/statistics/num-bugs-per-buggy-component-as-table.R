@@ -31,7 +31,7 @@ OUTPUT_FILE <- args[2]
 df <- load_CSV(INPUT_FILE)
 
 # Aggregate data
-df <- aggregate(formula=. ~ bug_id + bug_type + buggy_component, data=df, FUN=length)
+df <- aggregate(x=. ~ bug_id + bug_type + buggy_component, data=df, FUN=length)
 
 # Remove the output file if any
 unlink(OUTPUT_FILE)

@@ -73,7 +73,12 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   # Make it horizontal
   p <- p + coord_flip()
   # Add mean points
-  # p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  if (fill) {
+    p <- p + stat_summary(aes(shape=bug_type), fun=mean, geom='point', size=1.5, color='black', show.legend=TRUE, position=position_dodge(width=1))
+    p <- p + scale_shape_manual(name='', values=c(10, 12))
+  } else {
+    p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  }
   # Create facets, one per type of bug
   if (facets) {
     p <- p + facet_grid(~ bug_type)

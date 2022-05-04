@@ -33,7 +33,7 @@ df <- load_CSV(INPUT_FILE)
 
 # Aggregate data
 df$'count' <- 1
-agg_count <- aggregate(formula=count ~ project_full_name + bug_id + bug_type + buggy_component, data=df, FUN=sum)
+agg_count <- aggregate(x=count ~ project_full_name + bug_id + bug_type + buggy_component, data=df, FUN=sum)
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)

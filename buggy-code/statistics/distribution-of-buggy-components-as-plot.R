@@ -1,5 +1,6 @@
 # ------------------------------------------------------------------------------
-# This script plots the distribution of buggy components as boxplot.
+# This script plots the distribution of buggy components as boxplot, barplot, and
+# UpSetR plot.
 #
 # Usage:
 #   Rscript distribution-of-buggy-components-as-plot.R
@@ -12,6 +13,7 @@ source('../../utils/statistics/util.R')
 # Load external packages
 library('ggplot2')
 library('reshape2')
+library('UpSetR')
 library('nortest')
 library('effsize')
 
@@ -33,7 +35,7 @@ df <- load_CSV(INPUT_FILE)
 
 # Aggregate data
 df$'count' <- 1
-agg_count <- aggregate(formula=count ~ project_full_name + bug_id + bug_type + buggy_component, data=df, FUN=sum)
+agg_count <- aggregate(x=count ~ project_full_name + bug_id + bug_type + buggy_component, data=df, FUN=sum)
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)
@@ -73,7 +75,12 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   # Make it horizontal
   p <- p + coord_flip()
   # Add mean points
-  # p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  if (fill) {
+    p <- p + stat_summary(aes(shape=bug_type), fun=mean, geom='point', size=1.5, color='black', show.legend=TRUE, position=position_dodge(width=1))
+    p <- p + scale_shape_manual(name='', values=c(10, 12))
+  } else {
+    p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  }
   # Create facets, one per type of bug
   if (facets) {
     p <- p + facet_grid(~ bug_type)
@@ -113,6 +120,39 @@ p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), p
 p <- p + coord_flip()
 # Print it
 print(p)
+
+#
+# As UpSetR plot
+#
+
+for (bug_type in unique(df$'bug_type')) {
+  columns <- colnames(df)
+
+  for (keep_order in c(TRUE, FALSE)) {
+    plot_label(paste('UpSetR (overall)', '\n', 'keep.order=', keep_order, '\n', bug_type, sep=''))
+    a <- dcast(df[df$'bug_type' == bug_type, ], ... ~ buggy_component, value.var='buggy_component', fun.aggregate=length)
+    a <- a[ , which(colnames(a) %!in% columns) ]
+    p <- upset(a, sets=colnames(a), order.by=c('freq'), nintersects=50, keep.order=keep_order, set_size.show=TRUE,
+               mb.ratio=c(0.40, 0.60), #point.size=3.5, line.size=1.1,
+               # text.scale=c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars).
+               text.scale=c(1, 1.2, 1, 1.2, 1.3, 1.1),
+               set_size.scale_max=2500,
+               mainbar.y.label='Intersection Size', sets.x.label='Set Size')
+    print(p)
+
+    plot_label(paste('UpSetR (agg by bug)', '\n', 'keep.order=', keep_order, '\n', bug_type, sep=''))
+    a <- dcast(aggregate(x=. ~ bug_id + buggy_component, data=df[df$'bug_type' == bug_type, ], FUN=length),
+               bug_id ~ buggy_component, value.var='buggy_component', fun.aggregate=length)
+    a <- a[ , which(colnames(a) %!in% c('bug_id')) ]
+    p <- upset(a, sets=colnames(a), order.by=c('freq'), nintersects=NA, keep.order=keep_order, set_size.show=TRUE,
+               mb.ratio=c(0.40, 0.60), #point.size=3.5, line.size=1.1,
+               # text.scale=c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars).
+               text.scale=c(1, 1.2, 1, 1.2, 1.3, 1.1),
+               set_size.scale_max=100,
+               mainbar.y.label='Intersection Size', sets.x.label='Set Size')
+    print(p)
+  }
+}
 
 #
 # Perform statistical analysis

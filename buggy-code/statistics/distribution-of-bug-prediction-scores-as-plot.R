@@ -64,7 +64,7 @@ head(df) # FIXME remove me
 cat('[INFO] Computing TWRs authors, revisions, and bug-fix commits... \n')
 
 # Compute TWR's authors
-x_authors_twr                             <- aggregate(formula=alpha ~ bug_id + file_path + line_number + author_name, data=df, FUN=min)
+x_authors_twr                             <- aggregate(x=alpha ~ bug_id + file_path + line_number + author_name, data=df, FUN=min)
 x_authors_twr$'authors_twr'               <- 1 / (1 + exp(-12 * x_authors_twr$'alpha' + W))
 df                                        <- merge(df, x_authors_twr, by=c('bug_id', 'file_path', 'line_number', 'author_name', 'alpha'), all.x=TRUE)
 df$'authors_twr'[is.na(df$'authors_twr')] <- 0
@@ -82,7 +82,7 @@ df$'fixes_twr'[df$'bug_fix' == 1]         <- 1 / (1 + exp(-12 * df$'alpha'[df$'b
 #
 cat('[INFO] Computing TWRs sums... \n')
 
-df <- aggregate(formula=cbind(revisions_twr, authors_twr, fixes_twr) ~ project_full_name + bug_id + bug_type + file_path + line_number, data=df, FUN=sum)
+df <- aggregate(x=cbind(revisions_twr, authors_twr, fixes_twr) ~ project_full_name + bug_id + bug_type + file_path + line_number, data=df, FUN=sum)
 # Rename resulting columns
 names(df)[names(df) == 'revisions_twr'] <- 'sum_revisions_twr'
 names(df)[names(df) == 'authors_twr']   <- 'sum_authors_twr'

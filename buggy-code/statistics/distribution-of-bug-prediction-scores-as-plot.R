@@ -1,27 +1,31 @@
 # ------------------------------------------------------------------------------
-# This script plots the distribution of buggy prediction scores as boxplot.
+# This script plots the distribution of buggy prediction scores as boxplot and reports the ranking stats for each buggy component in a csv file
 #
 # Usage:
 #   Rscript distribution-of-bug-prediction-scores-as-plot.R
 #     <input data file, e.g., ../data/generated/code-lifetime-data.csv.gz>
 #     <output pdf file, e.g., distribution-of-bug-prediction-scores-as-plot.pdf>
+#     <output csv file, e.g., ranking-stats.csv>
 # ------------------------------------------------------------------------------
 
 source('../../utils/statistics/util.R')
 
 # Load external packages
 library('reshape2')
+library(dplyr)
+library(xtable)
 
 # ------------------------------------------------------------------------- Args
 
 args = commandArgs(trailingOnly=TRUE)
-if (length(args) != 2) {
-  stop('USAGE: Rscript distribution-of-bug-prediction-scores-as-plot.R <input data file, e.g., ../data/generated/code-lifetime-data.csv.gz> <output pdf file, e.g., distribution-of-bug-prediction-scores-as-plot.pdf>')
+if (length(args) != 3) {
+  stop('USAGE: Rscript distribution-of-bug-prediction-scores-as-plot.R <input data file, e.g., ../data/generated/code-lifetime-data.csv.gz> <output pdf file, e.g., distribution-of-bug-prediction-scores-as-plot.pdf>  <output csv file, e.g., ranking-stats.csv>')
 }
 
 # Args
 INPUT_FILE  <- args[1]
 OUTPUT_FILE <- args[2]
+OUTPUT_FILE_2 <- args[3]
 
 # Constant values suggested in the research paper
 # [An Empirical Study on the Use of Defect Prediction for Test Case Prioritization](https://ieeexplore.ieee.org/document/8730206) (see Table II)
@@ -107,6 +111,7 @@ df$'defect' <- 1 - exp(-df$'beta')
 head(df) # FIXME remove me
 summary(df$'defect')
 
+
 #
 # Get buggy-components per line of code from another dataframe and merge it
 #
@@ -117,12 +122,133 @@ cat('[INFO] Combining data... \n')
 # TODO 3. merge it with df
 # TODO 4. set the value of all NaNs (lines of code for each we have historical data but are not-buggy) in the 'buggy' column as 0
 
+
+buggyComponents <- read.csv(file = '../data/generated/buggy-code-data.csv', sep = ',')
+buggyComponents['buggy'] = c(1)
+names(buggyComponents)[names(buggyComponents) == 'buggy_file_path'] <- 'file_path'
+names(buggyComponents)[names(buggyComponents) == 'buggy_line_number'] <- 'line_number'
+mergedDf <- merge(x = buggyComponents,y = df, by=c("file_path","bug_id","line_number"), all.y=TRUE)
+mergedDf['buggy'][is.na(mergedDf['buggy'])] <- 0
+mergedDf['defect'][is.na(mergedDf['defect'])] <- 0
+
+head(mergedDf)
+
+
+### parse rows by bug_id to do rankings, appending data using iteration into an emptydf with ranking column to then merge with main dataframe
+unique_id <- unique(mergedDf$'bug_id')
+print(unique_id)
+appendDf <- data.frame()
+
+for(val in unique_id){
+  
+  tryCatch(
+    expr = {
+      print(val)
+    
+      newdata <- subset(mergedDf, bug_id == val,
+                        select=c(bug_id, file_path, line_number, defect))
+      newdata <- newdata[order(-newdata$'defect'),]
+      row.names(newdata) <- NULL
+      newdata['ranking'] = match(-newdata$'defect', sort(unique(-newdata$'defect')))
+      print(colnames(newdata))
+      print(colnames(mergedDf))
+    
+      appendDf <- rbind(appendDf, newdata)
+      print(nrow(newdata))
+      print(ncol(newdata))
+      print(nrow(mergedDf))
+      print(ncol(mergedDf))
+      #print(appendDf)
+    },
+  
+    error = function(e){
+      message('Caught an error!Defect object not detected')
+      print(e)
+    }
+
+)
+  
+}
+
+finalDf <- merge(x = appendDf,y = mergedDf, by=c("file_path","bug_id","line_number"), all.y=TRUE)
+#print('writing to csv')
+## writing to csv file just for debugging purposes
+#write.csv(finalDf,"ranking.csv", row.names = FALSE)
+
+
+
 #
 # Compute the distribution of bug-prediction scores overall, of buggy lines only,
-# min, max, average, median position of buggy lines, and top-N
+# min, max, average, median position of buggy lines, and top-N and transpose the data into a latex table
 #
-cat('[INFO] Compute the distribution of bug-prediction scores... \n')
+cat('[INFO] Compute ranking stats and save into csv file... \n')
 
-# TODO
+stats <- aggregate(finalDf$'ranking', list(finalDf$'buggy_component'),  FUN = function(x) c(mean = round(mean(x), digits = 1), median = round(median(x), digits = 1), max = round(max(x), digits = 1), min = round(min(x), digits = 1), top1 = round(sum(x <= 1), digits = 1), top10 = round(sum( x <= 10), digits =1), top200 = round(sum( x <= 200), digits = 1) )) 
+print(stats)
+write.csv(stats,OUTPUT_FILE_2 , row.names = FALSE)
+#stats <- knitr::kable(stats, format = 'latex')
+#writeLines(stats, 'ranking-stats-per-buggy-component.tex')
+
+cat('[INFO] Compute distribution of bug-prediction scores and export output into a pdf file... \n')
+
+# Remove any existing output file and create a new one
+unlink(OUTPUT_FILE)
+pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=9)
+# Add a cover page to the output file
+plot_label('Distributions')
+
+#
+# As boxplot
+#
+
+boxplot_it <- function(mergedDf, label, facets=FALSE, fill=FALSE) {
+  # Identify plot
+  plot_label(label)
+  # Basic boxplot
+  mergedDf=subset(mergedDf, !is.na(buggy_component))
+  if (fill) {
+    p <- ggplot(mergedDf, aes(x=buggy_component, y=defect, fill=bug_type.y))
+  } else {
+    p <- ggplot(mergedDf, aes(x=buggy_component, y=defect))
+  }
+  p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
+  # Change x axis label
+  p <- p + scale_x_discrete(name='')
+  # Change y axis label
+  p <- p + scale_y_continuous(name='Defect Probability Scores')
+  # Use grey scale color palette
+  if (fill) {
+    p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+  }
+  # Move legend's title to the top and increase size of [x-y]axis labels
+  p <- p + theme(legend.position='top',
+                 axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
+                 axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),
+                 axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
+                 axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
+  )
+  # Make it horizontal
+  p <- p + coord_flip()
+  # Add mean points
+  if (fill) {
+    p <- p + stat_summary(aes(shape=bug_type.y), fun=mean, geom='point', size=1.5, color='black', show.legend=TRUE, position=position_dodge(width=1))
+    p <- p + scale_shape_manual(name='', values=c(10, 12))
+  } else {
+    p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  }
+  # Create facets, one per type of bug
+  if (facets) {
+    p <- p + facet_grid(~ bug_type.y)
+  }
+  # Print it
+  print(p)
+}
+
+boxplot_it(mergedDf, 'Overall', facets=FALSE, fill=FALSE)
+boxplot_it(mergedDf, 'Classical and Quantum bugs (same plot)', facets=FALSE, fill=TRUE)
+boxplot_it(mergedDf, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE)
+boxplot_it(mergedDf[mergedDf$'bug_type.y' == 'Classical', ], 'Classical bugs', facets=FALSE, fill=FALSE)
+boxplot_it(mergedDf[mergedDf$'bug_type.y' == 'Quantum', ], 'Quantum bugs', facets=FALSE, fill=FALSE)
+
 
 # EOF

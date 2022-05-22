@@ -2,7 +2,8 @@
 #
 # ------------------------------------------------------------------------------
 # This script computes the set of buggy components (as the ones described in the
-# [Python's AST](https://docs.python.org/3/library/ast.html) documentation) per # buggy line of code of a given buggy file.  The set of buggy components is then
+# [Python's AST](https://docs.python.org/3/library/ast.html) documentation) per
+# buggy line of code of a given buggy file.  The set of buggy components is then
 # written to the provided output file.  The structure of the output file is the
 # following:
 #     buggy_line_number,buggy_component

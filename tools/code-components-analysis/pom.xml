@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org</groupId>
+  <artifactId>code-components-analysis</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>code-components-analysis</name>
+  <description>Utility program to analyze buggy/fixed code components.</description>
+  <!--url>https://github.com/???/code-components-analysis</url-->
+  <inceptionYear>2022</inceptionYear>
+  <organization>
+    <name>org</name>
+  </organization>
+
+  <!--developers>
+    <developer>
+      <id>??</id>
+      <name>??? ???</name>
+      <email>?????@?????.???</email>
+    </developer>
+  </developers-->
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <version.junit>4.12</version.junit>
+    <gumtreediff.version>3.0.0</gumtreediff.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${version.junit}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kohsuke.args4j</groupId>
+      <artifactId>args4j-maven-plugin</artifactId>
+      <version>2.33</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gumtreediff</groupId>
+      <artifactId>core</artifactId>
+      <version>${gumtreediff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gumtreediff</groupId>
+      <artifactId>client</artifactId>
+      <version>${gumtreediff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.gumtreediff</groupId>
+      <artifactId>gen.python</artifactId>
+      <version>${gumtreediff.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Usage example, mvn clean compile assembly:single -->
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <mainClass>org.codecomponents.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

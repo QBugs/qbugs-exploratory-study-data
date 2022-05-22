@@ -8,7 +8,6 @@
 #     <output pdf file, e.g., distribution-of-type-of-files-as-plot.pdf>
 # ------------------------------------------------------------------------------
 
-
 source('../../utils/statistics/util.R')
 
 # Load external packages
@@ -31,7 +30,6 @@ OUTPUT_FILE <- args[2]
 
 # ------------------------------------------------------------------------- Main
 
-
 # Load data
 df <- load_CSV(INPUT_FILE)
 
@@ -51,7 +49,7 @@ plot_label('Distributions')
 
 for (bug_type in unique(df$'bug_type')) {
   columns <- colnames(df)
-  
+
   for (keep_order in c(TRUE, FALSE)) {
     plot_label(paste('UpSetR (overall)', '\n', 'keep.order=', keep_order, '\n', bug_type, sep=''))
     a <- dcast(df[df$'bug_type' == bug_type, ], ... ~ type_of_file, value.var='type_of_file', fun.aggregate=length)
@@ -77,3 +75,10 @@ for (bug_type in unique(df$'bug_type')) {
     print(p)
   }
 }
+
+# Close output file
+dev.off()
+# Embed fonts
+embed_fonts_in_a_pdf(OUTPUT_FILE)
+
+# EOF

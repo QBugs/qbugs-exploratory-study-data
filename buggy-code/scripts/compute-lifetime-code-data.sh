@@ -88,6 +88,12 @@ while read -r bug_id; do
   # Aggregate data
   tail -n +2 "$jobs_dir_path/$bug_id.csv" >> "$OUTPUT_FILE_PATH"
 done < <(tail -n +2 "$BUGS_FILE_PATH" | shuf | cut -f4 -d',' | tr -d '"')
+[ -s "$OUTPUT_FILE_PATH" ] || die "[ERROR] $OUTPUT_FILE_PATH does not exist or it is empty!"
+
+# Compress output file
+Rscript "$SCRIPT_DIR/../../utils/scripts/compress-csv-file.R" \
+  "$OUTPUT_FILE_PATH" "$OUTPUT_FILE_PATH.gz" || die "[ERROR] Failed to compress $OUTPUT_FILE_PATH!"
+[ -s "$OUTPUT_FILE_PATH.gz" ] || die "[ERROR] $OUTPUT_FILE_PATH.gz does not exist or it is empty!"
 
 echo "DONE!"
 exit 0

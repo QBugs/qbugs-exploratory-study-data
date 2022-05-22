@@ -3,7 +3,8 @@
 #
 # Usage:
 #   Rscript distribution-of-buggy-components-lifetime-as-plot.R
-#     <input data file, e.g., ../data/generated/buggy-code-lifetime-data.csv>
+#     <buggy components input data file, e.g., ../data/generated/buggy-code-data.csv>
+#     <bug reports input data file, e.g., ../data/issues-data.csv>
 #     <output pdf file, e.g., distribution-of-buggy-components-lifetime-as-plot.pdf>
 # ------------------------------------------------------------------------------
 
@@ -16,82 +17,27 @@ library('reshape2')
 # ------------------------------------------------------------------------- Args
 
 args = commandArgs(trailingOnly=TRUE)
-if (length(args) != 2) {
-  stop('USAGE: Rscript distribution-of-buggy-components-lifetime-as-plot.R <input data file, e.g., ../data/generated/buggy-code-lifetime-data.csv> <output pdf file, e.g., distribution-of-buggy-components-lifetime-as-plot.pdf>')
+if (length(args) != 3) {
+  stop('USAGE: Rscript distribution-of-buggy-components-lifetime-as-plot.R <buggy components input data file, e.g., ../data/generated/buggy-code-data.csv> <bug reports input data file, e.g., ../data/issues-data.csv> <output pdf file, e.g., distribution-of-buggy-components-lifetime-as-plot.pdf>')
 }
 
 # Args
-INPUT_FILE  <- args[1]
-OUTPUT_FILE <- args[2]
+BUGGY_COMPONENTS_INPUT_FILE <- args[1]
+BUG_REPORTS_INPUT_FILE      <- args[2]
+OUTPUT_FILE                 <- args[3]
 
 # ------------------------------------------------------------------------- Main
 
 # Load data
-df <- load_CSV(INPUT_FILE)
+df <- load_CSV(BUGGY_COMPONENTS_INPUT_FILE)
+df_bug_reports <- load_CSV(BUG_REPORTS_INPUT_FILE)
 
-#
-# Pre-process data, i.e., compute
-#  * number of different authors that modified each buggy component on each buggy line
-#  * number of times each buggy component has been modified
-#  * seconds between the buggy and fixed version
-#
-# TODO: I am certain there might be a better way to achieve the following using
-# aggregate and filters.
-df_proc <- data.frame()
-for (bug_id in unique(df$'bug_id')) {
-  bug_id_mask <- df$'bug_id' == bug_id
-
-  for (bug_type in unique(df$'bug_type'[bug_id_mask])) {
-    bug_type_mask <- df$'bug_type' == bug_type
-
-    for (buggy_file_path in unique(df$'buggy_file_path'[bug_id_mask & bug_type_mask])) {
-      buggy_file_path_mask <- df$'buggy_file_path' == buggy_file_path
-
-      for (buggy_line_number in unique(df$'buggy_line_number'[bug_id_mask & bug_type_mask & buggy_file_path_mask])) {
-        buggy_line_number_mask <- df$'buggy_line_number' == buggy_line_number
-
-        for (buggy_component in unique(df$'buggy_component'[bug_id_mask & bug_type_mask & buggy_file_path_mask & buggy_line_number_mask])) {
-          buggy_component_mask <- df$'buggy_component' == buggy_component
-
-          x <- df[bug_id_mask & bug_type_mask & buggy_file_path_mask & buggy_line_number_mask & buggy_component_mask, ]
-          stopifnot(nrow(x) >= 2)
-
-          row <- data.frame(
-            bug_id=bug_id,
-            bug_type=bug_type,
-            # buggy_file_path=buggy_file_path,
-            # buggy_line_number=buggy_line_number,
-            buggy_component=buggy_component,
-            number_of_authors=length(unique(x$'author_name')),
-            number_of_modifications=nrow(x),
-            time_to_fix=ceiling((x$'author_commit_date'[1] - x$'author_commit_date'[2]) / 3600.0)
-          )
-          df_proc <- rbind(df_proc, row)
-        }
-      }
-    }
-  }
-}
-
-agg_mean <- aggregate(x=. ~ bug_id + bug_type + buggy_component, data=df_proc, FUN=mean)
-print(head(agg_mean)) # Debug
-
-# Reshape data
-agg_mean_long <- melt(data=agg_mean,
-                      id.vars=c('bug_id', 'bug_type', 'buggy_component'),
-                      variable.name='var',
-                      value.name='value')
-# Convert vars column to character so it could be renamed without the known
-# "invalid factor level, NA generated" error
-agg_mean_long$'var' <- as.character(agg_mean_long$'var')
-# Pretty print vars
-agg_mean_long$'var'[agg_mean_long$'var' == 'number_of_authors'] <- '# Authors'
-agg_mean_long$'var'[agg_mean_long$'var' == 'number_of_modifications'] <- '# Modifications'
-agg_mean_long$'var'[agg_mean_long$'var' == 'time_to_fix'] <- 'Time to fix (hours)'
-# Make vars factors
-agg_mean_long$'var' <- as.factor(agg_mean_long$'var')
-
-print(head(agg_mean_long)) # Debug
+df <- merge(df, df_bug_reports)
+df$'seconds' <- df$'fix_timestamp' - df$'issue_timestamp'
+stopifnot(min(df$'seconds') > 0) # Runtime sanity check
+df$'minutes' <- df$'seconds' / 60
+df$'hours'   <- df$'minutes' / 60
+df$'days'    <- df$'hours'   / 24
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)
@@ -103,20 +49,20 @@ plot_label('Distributions')
 # As boxplot
 #
 
-boxplot_it <- function(df, label='', fill=FALSE) {
+boxplot_it <- function(df, yaxis='', label='', facets=FALSE, fill=FALSE) {
   # Identify plot
   plot_label(label)
   # Basic boxplot
   if (fill) {
-    p <- ggplot(df, aes(x=buggy_component, y=value, fill=bug_type))
+    p <- ggplot(df, aes_string(x='buggy_component', y=yaxis, fill='bug_type'))
   } else {
-    p <- ggplot(df, aes(x=buggy_component, y=value))
+    p <- ggplot(df, aes_string(x='buggy_component', y=yaxis))
   }
   p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
-  p <- p + scale_y_continuous(name='(log2)', trans='log2')
+  p <- p + scale_y_continuous(name=paste(yaxis, ' (log2)', sep=''), trans='log2')
   # Use grey scale color palette
   if (fill) {
     p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
@@ -131,17 +77,27 @@ boxplot_it <- function(df, label='', fill=FALSE) {
   # Make it horizontal
   p <- p + coord_flip()
   # Add mean points
-  # p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
-  # Create facets, one per variable (i.e., number_of_authors, number_of_modifications, time_to_fix)
-  p <- p + facet_grid(~ var, scales='free_x')
+  if (fill) {
+    p <- p + stat_summary(aes(shape=bug_type), fun=mean, geom='point', size=1.5, color='black', show.legend=TRUE, position=position_dodge(width=1))
+    p <- p + scale_shape_manual(name='', values=c(10, 12))
+  } else {
+    p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  }
+  # Create facets, one per type of bug
+  if (facets) {
+    p <- p + facet_grid(~ bug_type)
+  }
   # Print it
   print(p)
 }
 
-boxplot_it(agg_mean_long, 'Overall', fill=FALSE)
-boxplot_it(agg_mean_long, 'Overall (per bug type)', fill=TRUE)
-boxplot_it(agg_mean_long[agg_mean_long$'bug_type' == 'Classical', ], 'Classical bugs', fill=FALSE)
-boxplot_it(agg_mean_long[agg_mean_long$'bug_type' == 'Quantum', ], 'Quantum bugs', fill=FALSE)
+for (yaxis in c('seconds', 'minutes', 'hours', 'days')) {
+  boxplot_it(df, yaxis, 'Overall', facets=FALSE, fill=FALSE)
+  boxplot_it(df, yaxis, paste('Classical and Quantum bugs (same plot)', '\n', yaxis, sep=''), facets=FALSE, fill=TRUE)
+  boxplot_it(df, yaxis, paste('Classical and Quantum bugs (facets)', '\n', yaxis, sep=''), facets=TRUE, fill=FALSE)
+  boxplot_it(df[df$'bug_type' == 'Classical', ], yaxis, paste('Classical bugs', '\n', yaxis, sep=''), facets=FALSE, fill=FALSE)
+  boxplot_it(df[df$'bug_type' == 'Quantum', ], yaxis, paste('Quantum bugs', '\n', yaxis, sep=''), facets=FALSE, fill=FALSE)
+}
 
 # Close output file
 dev.off()

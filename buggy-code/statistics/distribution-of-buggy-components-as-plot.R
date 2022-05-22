@@ -39,7 +39,7 @@ agg_count <- aggregate(x=count ~ project_full_name + bug_id + bug_type + buggy_c
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)
-pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=9)
+pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=10)
 # Add a cover page to the output file
 plot_label('Distributions')
 

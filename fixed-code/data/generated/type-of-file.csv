@@ -1,15 +1,15 @@
 fix_commit_hash,bug_id,bug_type,file_path,project_name,extension,type_of_file
 ec1b4ce759f1fb8ba0242dd6c4a309fa1b586666,1,Classical,qiskit_ignis/tomography/fitters/cvx_fit.py,qiskit-ignis,py,Source Code File
 e696fee3e52550f50fb240a4c6356c61c9f01725,10,Quantum,qiskit/ignis/characterization/calibrations/ibmq_utils.py,qiskit-ignis,py,Source Code File
-dc7a2413e6c373455c00cff51e37eaaa17a4a7ac,1010,Quantum,src/controllers/controller.hpp,qiskit-aer,hpp,Header File
-dc7a2413e6c373455c00cff51e37eaaa17a4a7ac,1010,Quantum,src/controllers/qasm_controller.hpp,qiskit-aer,hpp,Header File
+dc7a2413e6c373455c00cff51e37eaaa17a4a7ac,1010,Quantum,src/controllers/controller.hpp,qiskit-aer,hpp,Source Code File
+dc7a2413e6c373455c00cff51e37eaaa17a4a7ac,1010,Quantum,src/controllers/qasm_controller.hpp,qiskit-aer,hpp,Source Code File
 7de864cc989b354d0ad1febbd62b891270927b6b,1012,Classical,releasenotes/notes/fix-diagonal-unitary-check-a726500ffda6c74b.yaml,qiskit-aer,yaml,Configuration File
-7de864cc989b354d0ad1febbd62b891270927b6b,1012,Classical,src/framework/operations.hpp,qiskit-aer,hpp,Header File
+7de864cc989b354d0ad1febbd62b891270927b6b,1012,Classical,src/framework/operations.hpp,qiskit-aer,hpp,Source Code File
 7de864cc989b354d0ad1febbd62b891270927b6b,1012,Classical,test/terra/backends/qasm_simulator/qasm_unitary_gate.py,qiskit-aer,py,Source Code File
 7de864cc989b354d0ad1febbd62b891270927b6b,1012,Classical,test/terra/reference/ref_diagonal_gate.py,qiskit-aer,py,Source Code File
 f3b4303f478ff84bf8da15761827287d3a2f16e4,1019,Quantum,releasenotes/notes/fix-density-matrix-diagonal-bb8ce049e2fa3c64.yaml,qiskit-aer,yaml,Configuration File
-f3b4303f478ff84bf8da15761827287d3a2f16e4,1019,Quantum,src/simulators/density_matrix/densitymatrix_state.hpp,qiskit-aer,hpp,Header File
-0eab74b57f2704ad0893132b6c5f214603550c39,1022,Quantum,src/simulators/density_matrix/densitymatrix_thrust.hpp,qiskit-aer,hpp,Header File
+f3b4303f478ff84bf8da15761827287d3a2f16e4,1019,Quantum,src/simulators/density_matrix/densitymatrix_state.hpp,qiskit-aer,hpp,Source Code File
+0eab74b57f2704ad0893132b6c5f214603550c39,1022,Quantum,src/simulators/density_matrix/densitymatrix_thrust.hpp,qiskit-aer,hpp,Source Code File
 01196202394aed89f43d3044d64eb9e41f7d583c,104,Classical,.github/CHANGELOG.md,pennylane,md,Documentation File
 01196202394aed89f43d3044d64eb9e41f7d583c,104,Classical,pennylane/devices/default_qubit.py,pennylane,py,Source Code File
 01196202394aed89f43d3044d64eb9e41f7d583c,104,Classical,pennylane/devices/default_qubit_tf.py,pennylane,py,Source Code File
@@ -17,13 +17,13 @@ f3b4303f478ff84bf8da15761827287d3a2f16e4,1019,Quantum,src/simulators/density_mat
 01196202394aed89f43d3044d64eb9e41f7d583c,104,Classical,tests/devices/test_default_qubit_autograd.py,pennylane,py,Source Code File
 01196202394aed89f43d3044d64eb9e41f7d583c,104,Classical,tests/devices/test_default_qubit_tf.py,pennylane,py,Source Code File
 48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,releasenotes/notes/fix-c-if-large-register-79d6649395e57ff5.yaml,qiskit-aer,yaml,Configuration File
-48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,src/framework/creg.hpp,qiskit-aer,hpp,Header File
-48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,src/framework/utils.hpp,qiskit-aer,hpp,Header File
+48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,src/framework/creg.hpp,qiskit-aer,hpp,Source Code File
+48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,src/framework/utils.hpp,qiskit-aer,hpp,Source Code File
 48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,test/terra/backends/qasm_simulator/qasm_conditional.py,qiskit-aer,py,Source Code File
 48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,test/terra/backends/statevector_simulator/statevector_basics.py,qiskit-aer,py,Source Code File
 48498dd0edc4e1ed1ee4bb287edd89541af104b2,1057,Classical,test/terra/reference/ref_conditionals.py,qiskit-aer,py,Source Code File
 72674296de7de6cfdf812595be33a2f6f637a29f,1067,Quantum,releasenotes/notes/issue1126-e2d51f660b0078db.yaml,qiskit-aer,yaml,Configuration File
-72674296de7de6cfdf812595be33a2f6f637a29f,1067,Quantum,src/simulators/matrix_product_state/matrix_product_state.hpp,qiskit-aer,hpp,Header File
+72674296de7de6cfdf812595be33a2f6f637a29f,1067,Quantum,src/simulators/matrix_product_state/matrix_product_state.hpp,qiskit-aer,hpp,Source Code File
 72674296de7de6cfdf812595be33a2f6f637a29f,1067,Quantum,test/terra/reference/ref_measure.py,qiskit-aer,py,Source Code File
 474f337b176f706a180ac62d6c7840c01f604192,107,Quantum,.github/CHANGELOG.md,pennylane,md,Documentation File
 474f337b176f706a180ac62d6c7840c01f604192,107,Quantum,pennylane/interfaces/torch.py,pennylane,py,Source Code File
@@ -33,22 +33,22 @@ f3b4303f478ff84bf8da15761827287d3a2f16e4,1019,Quantum,src/simulators/density_mat
 7fe4f9eadc835705c25c13c753b8550b199efa44,1070,Quantum,test/terra/backends/qasm_simulator/qasm_save_expval.py,qiskit-aer,py,Source Code File
 20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,releasenotes/notes/mps-kraus-bug-1299a1c96e947125.yaml,qiskit-aer,yaml,Configuration File
 20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,src/simulators/matrix_product_state/matrix_product_state_internal.cpp,qiskit-aer,cpp,Source Code File
-20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,src/simulators/matrix_product_state/svd.hpp,qiskit-aer,hpp,Header File
+20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,src/simulators/matrix_product_state/svd.hpp,qiskit-aer,hpp,Source Code File
 20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,test/terra/backends/qasm_simulator/qasm_noise.py,qiskit-aer,py,Source Code File
 20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,test/terra/backends/test_qasm_simulator_matrix_product_state.py,qiskit-aer,py,Source Code File
 20c3b06c2464ce0342a920dfbe91c6a496707f7f,1073,Quantum,test/terra/reference/ref_kraus_noise.py,qiskit-aer,py,Source Code File
 759a01f43726d5146422141bfdcc83fc34c180d0,1076,Quantum,releasenotes/notes/bug-fix-mps-kraus-764cc96854585030.yaml,qiskit-aer,yaml,Configuration File
 759a01f43726d5146422141bfdcc83fc34c180d0,1076,Quantum,src/simulators/matrix_product_state/matrix_product_state_internal.cpp,qiskit-aer,cpp,Source Code File
-759a01f43726d5146422141bfdcc83fc34c180d0,1076,Quantum,src/simulators/matrix_product_state/matrix_product_state_internal.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/aer_controller.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/controller.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/qasm_controller.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/framework/utils.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/density_matrix/densitymatrix_state_chunk.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/state_chunk.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/statevector/statevector_state_chunk.hpp,qiskit-aer,hpp,Header File
-bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/transpile/cacheblocking.hpp,qiskit-aer,hpp,Header File
-1cfa05e66c090ed6b57e7631b4935f2a7f5a6aad,1096,Quantum,src/transpile/fusion.hpp,qiskit-aer,hpp,Header File
+759a01f43726d5146422141bfdcc83fc34c180d0,1076,Quantum,src/simulators/matrix_product_state/matrix_product_state_internal.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/aer_controller.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/controller.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/controllers/qasm_controller.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/framework/utils.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/density_matrix/densitymatrix_state_chunk.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/state_chunk.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/simulators/statevector/statevector_state_chunk.hpp,qiskit-aer,hpp,Source Code File
+bd00cf0e317a262f9b5cc500a07505a8323bc792,1092,Classical,src/transpile/cacheblocking.hpp,qiskit-aer,hpp,Source Code File
+1cfa05e66c090ed6b57e7631b4935f2a7f5a6aad,1096,Quantum,src/transpile/fusion.hpp,qiskit-aer,hpp,Source Code File
 3c59f82c11e87c071bc7e84240b50e2aa995281f,11,Quantum,test/tomography/test_process_tomography.py,qiskit-ignis,py,Source Code File
 3c59f82c11e87c071bc7e84240b50e2aa995281f,11,Quantum,test/tomography/test_state_tomography.py,qiskit-ignis,py,Source Code File
 c0d269e5f1eba2f9d033bd9b6a79c10a11f4228a,110,Classical,pennylane/devices/default_qubit_tf.py,pennylane,py,Source Code File
@@ -78,7 +78,7 @@ c703417beb3c97f73514d6f39320251a1c7dadab,1115,Quantum,.travis.yml,ProjectQ,yml,C
 c703417beb3c97f73514d6f39320251a1c7dadab,1115,Quantum,README.rst,ProjectQ,rst,Text File
 c703417beb3c97f73514d6f39320251a1c7dadab,1115,Quantum,projectq/setups/decompositions/arb1qubit2rzandry.py,ProjectQ,py,Source Code File
 c703417beb3c97f73514d6f39320251a1c7dadab,1115,Quantum,projectq/setups/decompositions/arb1qubit2rzandry_test.py,ProjectQ,py,Source Code File
-62d3fb11578a06131b0105b220651520b2a7338b,1116,Quantum,projectq/backends/_sim/_cppkernels/simulator.hpp,ProjectQ,hpp,Header File
+62d3fb11578a06131b0105b220651520b2a7338b,1116,Quantum,projectq/backends/_sim/_cppkernels/simulator.hpp,ProjectQ,hpp,Source Code File
 62d3fb11578a06131b0105b220651520b2a7338b,1116,Quantum,projectq/backends/_sim/_pysim.py,ProjectQ,py,Source Code File
 62d3fb11578a06131b0105b220651520b2a7338b,1116,Quantum,projectq/backends/_sim/_simulator_test.py,ProjectQ,py,Source Code File
 11f45873e20c2fa78fab2b59b5b460ac5f595fc6,1118,Classical,docs/projectq.ops.rst,ProjectQ,rst,Text File
@@ -90,6 +90,222 @@ c703417beb3c97f73514d6f39320251a1c7dadab,1115,Quantum,projectq/setups/decomposit
 6ef8a0eeb06267b27bbbe9207b71013e9cca65d4,1122,Classical,examples/aqt.py,ProjectQ,py,Source Code File
 6ef8a0eeb06267b27bbbe9207b71013e9cca65d4,1122,Classical,examples/ibm.py,ProjectQ,py,Source Code File
 c15f3b25dd2efc426507360a19b6b1dded2ec37e,1123,Classical,setup.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,.pre-commit-config.yaml,ProjectQ,yaml,Configuration File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,CHANGELOG.md,ProjectQ,md,Documentation File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,docs/conf.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,docs/package_description.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/aqt.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/bellpair_circuit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/control_tester.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/gate_zoo.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/grover.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/hws4.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/hws6.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/ibm.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/ionq.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/ionq_bv.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/ionq_half_adder.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/quantum_random_numbers.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/quantum_random_numbers_ibm.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/shor.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/teleport.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/teleport_circuit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,examples/unitary_simulator.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_aqt/_aqt.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_aqt/_aqt_http_client.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_aqt/_aqt_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket_boto3_client.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket_boto3_client_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket_boto3_client_test_fixtures.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_awsbraket/_awsbraket_test_fixtures.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_drawer.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_drawer_matplotlib.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_drawer_matplotlib_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_drawer_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_plot.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_plot_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_to_latex.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_circuits/_to_latex_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_exceptions.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ibm/_ibm.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ibm/_ibm_http_client.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ibm/_ibm_http_client_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ibm/_ibm_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_exc.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_http_client.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_http_client_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_mapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_mapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_ionq/_ionq_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_printer.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_printer_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_resource.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_resource_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_classical_simulator.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_classical_simulator_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_pysim.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_simulator.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_simulator_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_sim/_simulator_test_fixtures.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_unitary.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/backends/_unitary_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_basicmapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_basicmapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_basics.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_basics_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_cmdmodifier.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_cmdmodifier_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_ibm5qubitmapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_ibm5qubitmapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_linearmapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_linearmapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_main.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_main_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_manualmapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_manualmapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_optimize.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_optimize_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_replacer/_decomposition_rule.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_replacer/_decomposition_rule_set.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_replacer/_decomposition_rule_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_replacer/_replacer.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_replacer/_replacer_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_swapandcnotflipper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_swapandcnotflipper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_tagremover.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_tagremover_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_testengine.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_testengine_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_twodmapper.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/cengines/_twodmapper_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/hist/_histogram.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/hist/_histogram_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_constantmath.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_constantmath_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_default_rules.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_gates.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_gates_math_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_gates_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_quantummath.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/math/_quantummath_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_control_function.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_control_function_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_permutation.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_permutation_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_phase.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_phase_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/libs/revkit/_utils.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_compute.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_compute_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_control.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_control_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_dagger.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_dagger_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_dirtyqubit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_dirtyqubit_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_exceptions.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_logicalqubit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_loop.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_loop_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_util.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/meta/_util_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_basics.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_basics_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_command.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_command_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_gates.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_gates_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_metagates.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_metagates_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qaagate.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qaagate_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qftgate.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qpegate.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qpegate_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qubit_operator.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_qubit_operator_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_shortcuts.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_shortcuts_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_state_prep.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_state_prep_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_time_evolution.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_time_evolution_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_uniformly_controlled_rotation.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/ops/_uniformly_controlled_rotation_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/_utils.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/aqt.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/aqt_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/awsbraket.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/awsbraket_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/__init__.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/_gates_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/amplitudeamplification.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/amplitudeamplification_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/arb1qubit2rzandry.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/arb1qubit2rzandry_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/carb1qubit2cnotrzandry.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnot2cz.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnot2cz_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnot2rxx.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnot2rxx_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnu2toffoliandcu.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/cnu2toffoliandcu_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/controlstate.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/controlstate_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/crz2cxandrz.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/entangle.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/h2rx.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/h2rx_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/phaseestimation.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/phaseestimation_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/qft2crandhadamard.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/qubitop2onequbit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/qubitop2onequbit_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/r2rzandph.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/rx2rz.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/ry2rz.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/rz2rx.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/rz2rx_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/sqrtswap2cnot.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/sqrtswap2cnot_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/stateprep2cnot.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/stateprep2cnot_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/swap2cnot.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/time_evolution.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/time_evolution_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/toffoli2cnotandtgate.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/uniformlycontrolledr2cnot.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/decompositions/uniformlycontrolledr2cnot_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/default.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/grid.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/grid_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/ibm.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/ibm_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/ionq.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/ionq_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/linear.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/linear_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/restrictedgateset.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/restrictedgateset_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/trapped_ion_decomposer.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/setups/trapped_ion_decomposer_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/tests/_factoring_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/types/_qubit.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,projectq/types/_qubit_test.py,ProjectQ,py,Source Code File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,pyproject.toml,ProjectQ,toml,Configuration File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,setup.cfg,ProjectQ,cfg,Configuration File
+1c07475ad9dbc30baedddf78fddafa96112ffcdc,1126,Quantum,setup.py,ProjectQ,py,Source Code File
 cbf36bc4d8efcac9f4f20bbbc2b87ca302611c91,1139,Classical,Canon/src/Math/Random.qs,QuantumLibraries,qs,Data File
 1c8620c10cfbf016d315668e22766c091502eea4,1156,Quantum,Standard/src/Arithmetic/Integer.qs,QuantumLibraries,qs,Data File
 1c8620c10cfbf016d315668e22766c091502eea4,1156,Quantum,Standard/tests/IntegerTests.qs,QuantumLibraries,qs,Data File
@@ -176,17 +392,17 @@ ed60c81e5192cddd5f7342c08a1c00d392473127,1229,Classical,src/QsCompiler/Tests.Com
 2dbaea713e9fe1925a4b14483d37c0decaea6ba8,1233,Classical,src/QsCompiler/Tests.Compiler/TestCases/QirTests/TestStrings.ll,qsharp-compiler,ll,Source Code File
 2dbaea713e9fe1925a4b14483d37c0decaea6ba8,1233,Classical,src/QsCompiler/Tests.Compiler/Tests.Compiler.fsproj,qsharp-compiler,fsproj,Build File
 c3d1a09f70960d09af68e805294962e7e6c690d8,1234,Classical,src/QuantumSdk/Sdk/Sdk.targets,qsharp-compiler,targets,Source Code File
-bc0d1c7981a71349d6b1fd816276df8645dfc010,1245,Quantum,ql/arch/cc_light_scheduler.h,OpenQL,h,Header File
+bc0d1c7981a71349d6b1fd816276df8645dfc010,1245,Quantum,ql/arch/cc_light_scheduler.h,OpenQL,h,Source Code File
 a8494680613fc0912aa4bb9184d0a4d8b1f94a08,1246,Classical,openql/CMakeLists.txt,OpenQL,txt,Text File
 a8494680613fc0912aa4bb9184d0a4d8b1f94a08,1246,Classical,openql/quick_feature_test.makefile,OpenQL,makefile,Build File
 a8494680613fc0912aa4bb9184d0a4d8b1f94a08,1246,Classical,openql/quick_feature_test.py,OpenQL,py,Source Code File
 a8494680613fc0912aa4bb9184d0a4d8b1f94a08,1246,Classical,openql/temp.txt,OpenQL,txt,Text File
 a8494680613fc0912aa4bb9184d0a4d8b1f94a08,1246,Classical,tests/test_bugs.py,OpenQL,py,Source Code File
 9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,openql/quick_feature_test.py,OpenQL,py,Source Code File
-9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/arch/cc_light_resource_manager.h,OpenQL,h,Header File
-9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/arch/cc_light_scheduler.h,OpenQL,h,Header File
-9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/scheduler.h,OpenQL,h,Header File
-9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/utils.h,OpenQL,h,Header File
+9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/arch/cc_light_resource_manager.h,OpenQL,h,Source Code File
+9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/arch/cc_light_scheduler.h,OpenQL,h,Source Code File
+9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/scheduler.h,OpenQL,h,Source Code File
+9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,ql/utils.h,OpenQL,h,Source Code File
 9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,tests/golden/test_barrier.qisa,OpenQL,qisa,Source Code File
 9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,tests/golden/test_smit_all_bundled.qisa,OpenQL,qisa,Source Code File
 9a443a2ddd15349d2750edcf5b9cbbbef82e5929,1254,Quantum,tests/golden/test_wait_barrier.qisa,OpenQL,qisa,Source Code File
@@ -250,8 +466,8 @@ a4d7abdc047869a2d378e54c7b1cc0b036ae7625,150,Quantum,tests/test_qubit_device_adj
 7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/_compat.py,Cirq,py,Source Code File
 7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/_compat_test.py,Cirq,py,Source Code File
 7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/protocols/json_serialization.py,Cirq,py,Source Code File
-7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/protocols/json_test_data/TrialResult.json,Cirq,json,Source Code File
-7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/protocols/json_test_data/TrialResult.repr,Cirq,repr,Source Code File
+7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/protocols/json_test_data/TrialResult.json,Cirq,json,Data File
+7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/protocols/json_test_data/TrialResult.repr,Cirq,repr,Data File
 7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/study/result.py,Cirq,py,Source Code File
 7c8c959e5e4b90f857cd1539279c51d30224033c,1518,Classical,cirq/study/result_test.py,Cirq,py,Source Code File
 00f29904c6de484c6bd273fdca47bc80a0f84eba,1537,Classical,.github/workflows/ci.yml,Cirq,yml,Configuration File
@@ -389,7 +605,7 @@ c7173f9052a1166bc1a205141033e98331cf0de9,1858,Classical,tests/frontend/test_ops_
 45309dcad0133d2c59a91c09ab294bef29a7a621,1864,Quantum,strawberryfields/tdm/tdmprogram.py,strawberryfields,py,Source Code File
 45309dcad0133d2c59a91c09ab294bef29a7a621,1864,Quantum,tests/frontend/test_io.py,strawberryfields,py,Source Code File
 45309dcad0133d2c59a91c09ab294bef29a7a621,1864,Quantum,tests/frontend/test_tdmprogram.py,strawberryfields,py,Source Code File
-c334829352fc2b490c407b6a09fb767a16516bbf,1869,Quantum,impls/rigetti/QuilVisitor.hpp,xacc,hpp,Header File
+c334829352fc2b490c407b6a09fb767a16516bbf,1869,Quantum,impls/rigetti/QuilVisitor.hpp,xacc,hpp,Source Code File
 c334829352fc2b490c407b6a09fb767a16516bbf,1869,Quantum,impls/rigetti/RigettiAccelerator.cpp,xacc,cpp,Source Code File
 e980988e148243ed5d650317cad2870c6985f2ae,1878,Classical,tpls/CMakeLists.txt,xacc,txt,Text File
 92cb256530f4793fee007b6c1e8c9db4a22a1a7f,1936,Classical,pyquil/_parser/PyQuilListener.py,pyquil,py,Source Code File
@@ -556,7 +772,7 @@ a18ef48c8a9fd0182064c81c0e7d79ad1c4c0ee6,225,Quantum,qiskit/extensions/standard/
 a18ef48c8a9fd0182064c81c0e7d79ad1c4c0ee6,225,Quantum,qiskit/mapper/_coupling.py,qiskit-terra,py,Source Code File
 a18ef48c8a9fd0182064c81c0e7d79ad1c4c0ee6,225,Quantum,test/python/test_mapper.py,qiskit-terra,py,Source Code File
 a18ef48c8a9fd0182064c81c0e7d79ad1c4c0ee6,225,Quantum,test/python/test_quantumprogram.py,qiskit-terra,py,Source Code File
-6b6c370725dec7b61618c1d6f1cc62b8cf1a0907,234,Classical,src/qasm-simulator-cpp/src/backends/clifford_backend.hpp,qiskit-terra,hpp,Header File
+6b6c370725dec7b61618c1d6f1cc62b8cf1a0907,234,Classical,src/qasm-simulator-cpp/src/backends/clifford_backend.hpp,qiskit-terra,hpp,Source Code File
 00d37c780dba447551e1e544a12b3aef10a43d53,255,Quantum,CHANGELOG.rst,qiskit-terra,rst,Text File
 00d37c780dba447551e1e544a12b3aef10a43d53,255,Quantum,qiskit/unroll/_circuitbackend.py,qiskit-terra,py,Source Code File
 439b3ee739fde633337f89b617c18821b25da0ad,26,Quantum,qiskit/ignis/characterization/calibrations/pulse_schedules.py,qiskit-ignis,py,Source Code File
@@ -564,20 +780,20 @@ a18ef48c8a9fd0182064c81c0e7d79ad1c4c0ee6,225,Quantum,test/python/test_quantumpro
 0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,qiskit/ignis/verification/randomized_benchmarking/circuits.py,qiskit-ignis,py,Source Code File
 0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,releasenotes/notes/rb-seed-fix-24957ed1e9ffe31c.yaml,qiskit-ignis,yaml,Configuration File
 0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/generate_data.py,qiskit-ignis,py,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_X_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_Z_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_expected_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_coherent_purity_expected_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_coherent_purity_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_expected_results_1.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_expected_results_2.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_interleaved_expected_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_interleaved_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_original_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_purity_expected_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_purity_results.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_results_1.json,qiskit-ignis,json,Source Code File
-0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_results_2.json,qiskit-ignis,json,Source Code File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_X_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_Z_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_cnotdihedral_expected_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_coherent_purity_expected_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_coherent_purity_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_expected_results_1.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_expected_results_2.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_interleaved_expected_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_interleaved_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_original_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_purity_expected_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_purity_results.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_results_1.json,qiskit-ignis,json,Data File
+0af27dd1fdd5c4e4d2ef80d21d0375d11a1625fd,27,Classical,test/rb/test_fitter_results_2.json,qiskit-ignis,json,Data File
 824372e18a42a735bbef37cd8ee61bc5d5821f9f,30,Classical,qiskit/ignis/verification/randomized_benchmarking/dihedral.py,qiskit-ignis,py,Source Code File
 824372e18a42a735bbef37cd8ee61bc5d5821f9f,30,Classical,test/rb/test_dihedral.py,qiskit-ignis,py,Source Code File
 1f7b71999c28483064e91882ef1510ede23ba0e2,31,Quantum,qiskit/ignis/mitigation/expval/complete_mitigator.py,qiskit-ignis,py,Source Code File
@@ -646,12 +862,12 @@ e25aaaea83eaba1319cd0c770d47d1afd2156e0a,953,Classical,test/terra/backends/qasm_
 e25aaaea83eaba1319cd0c770d47d1afd2156e0a,953,Classical,test/terra/backends/test_qasm_simulator.py,qiskit-aer,py,Source Code File
 e25aaaea83eaba1319cd0c770d47d1afd2156e0a,953,Classical,test/terra/utils/mock.py,qiskit-aer,py,Source Code File
 cf5d8027d5a70f45751f1369f548b65c666442e1,964,Quantum,qiskit/providers/aer/noise/noise_model.py,qiskit-aer,py,Source Code File
-6e4b479700f04ccf1a421b819e88fc2218dcdbd3,968,Classical,src/base/controller.hpp,qiskit-aer,hpp,Header File
+6e4b479700f04ccf1a421b819e88fc2218dcdbd3,968,Classical,src/base/controller.hpp,qiskit-aer,hpp,Source Code File
 6e4b479700f04ccf1a421b819e88fc2218dcdbd3,968,Classical,test/terra/backends/qasm_simulator/qasm_measure.py,qiskit-aer,py,Source Code File
 6e4b479700f04ccf1a421b819e88fc2218dcdbd3,968,Classical,test/terra/common.py,qiskit-aer,py,Source Code File
 6e4b479700f04ccf1a421b819e88fc2218dcdbd3,968,Classical,test/terra/reference/ref_measure.py,qiskit-aer,py,Source Code File
 43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,CHANGELOG.md,qiskit-aer,md,Documentation File
-43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,src/simulators/unitary/unitary_state.hpp,qiskit-aer,hpp,Header File
+43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,src/simulators/unitary/unitary_state.hpp,qiskit-aer,hpp,Source Code File
 43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,test/terra/backends/qasm_simulator/qasm_noncliffords.py,qiskit-aer,py,Source Code File
 43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,test/terra/backends/test_statevector_simulator.py,qiskit-aer,py,Source Code File
 43580139161c5b96456ff984fa84a47c5fbcca9a,980,Classical,test/terra/backends/test_unitary_simulator.py,qiskit-aer,py,Source Code File

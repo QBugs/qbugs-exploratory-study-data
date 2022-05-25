@@ -250,5 +250,9 @@ boxplot_it(mergedDf, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FA
 boxplot_it(mergedDf[mergedDf$'bug_type.y' == 'Classical', ], 'Classical bugs', facets=FALSE, fill=FALSE)
 boxplot_it(mergedDf[mergedDf$'bug_type.y' == 'Quantum', ], 'Quantum bugs', facets=FALSE, fill=FALSE)
 
+# Close output file
+dev.off()
+# Embed fonts
+embed_fonts_in_a_pdf(OUTPUT_FILE)
 
 # EOF

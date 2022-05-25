@@ -76,7 +76,7 @@ done
 [ -s "$BUGS_FILE_PATH" ]      || die "[ERROR] $BUGS_FILE_PATH does not exist or it is empty!"
 # Remove the output_file_path (if any) and create a new one
 rm -f "$OUTPUT_FILE_PATH"
-echo "project_full_name,fix_commit_hash,buggy_commit_hash,bug_id,bug_type,buggy_file_path,buggy_line_number,buggy_component" > "$OUTPUT_FILE_PATH"
+echo "project_full_name,fix_commit_hash,buggy_commit_hash,bug_id,bug_type,buggy_file_path,buggy_line_number,buggy_component,edit_action" > "$OUTPUT_FILE_PATH"
 
 # ------------------------------------------------------------------------- Main
 
@@ -177,11 +177,12 @@ while read -r item; do
     [ -s "$tmp_buggy_components_file" ] || die "[ERROR] $tmp_buggy_components_file does not exist or it is empty!"
 
     # Write the buggy data computed to the output file
-    while read -r buggy_components_per_buggy_line; do
-      buggy_line_number=$(echo "$buggy_components_per_buggy_line" | cut -f1 -d',')
-      buggy_component=$(echo "$buggy_components_per_buggy_line" | cut -f2 -d',')
-      echo "$project_full_name,$fix_commit_hash,$buggy_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
-    done < <(tail -n +2 "$tmp_buggy_components_file" | cut -f2,3 -d',' | sort -u)
+    while read -r edit_action_per_buggy_component; do
+      edit_action=$(echo "$edit_action_per_buggy_component" | cut -f1 -d',')
+      buggy_line_number=$(echo "$edit_action_per_buggy_component" | cut -f2 -d',')
+      buggy_component=$(echo "$edit_action_per_buggy_component" | cut -f3 -d',')
+      echo "$project_full_name,$fix_commit_hash,$buggy_commit_hash,$bug_id,$bug_type,$buggy_file_path,$buggy_line_number,$buggy_component,$edit_action" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
+    done < <(tail -n +2 "$tmp_buggy_components_file")
   done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff --no-ext-diff --binary --name-status "$buggy_commit_hash" "$fix_commit_hash")
 done < <(tail -n +2 "$BUGS_FILE_PATH")
 

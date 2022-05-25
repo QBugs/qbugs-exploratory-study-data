@@ -130,7 +130,7 @@ cd "$work_dir"
         echo "$project_full_name,$fix_commit_hash,$bug_id,$bug_type,$file_path,$line_number,"$(grep "^$commit_hash," "$commits_file_path") >> "$OUTPUT_FILE_PATH"
       done < <(git log -L"$line_number,$line_number":"$file_path" "$buggy_commit_hash" --pretty=format:"%H" --no-patch | sed -e '$a\')
     done < <(cat -n "$file_path")
-  done < <(find . -type f -name "*.py" | grep -v "__init__.py" | sed 's|^./||g')
+  done < <(find . -type f -name "*.py" | grep -v "__init__.py" | grep -v --ignore-case "test" | sed 's|^./||g')
 popd > /dev/null 2>&1
 
 # Clean up, i.e., remove checkout directory

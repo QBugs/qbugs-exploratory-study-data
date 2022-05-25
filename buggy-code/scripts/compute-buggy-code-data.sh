@@ -100,24 +100,38 @@ while read -r item; do
 
   while read -r row; do
     echo "[DEBUG] Git: $row"
-             status=$(echo "$row" | cut -f1 -d$'\t')
-    buggy_file_path=$(echo "$row" | cut -f2 -d$'\t')
-    fixed_file_path=$(echo "$row" | cut -f3 -d$'\t')
 
-    if [ "$status" == "D" ]; then
-      # Deleted files in the fixed version were buggy in the buggy version but they no longer exist in the fixed version
-      fixed_file_path="$EMPTY_FILE"
-    elif [ "$status" == "A" ]; then
-      # New files in the fixed version were not buggy in the buggy version as they did not exist
+    status=$(echo "$row" | cut -f1 -d$'\t')
+    if [ "$status" == "A" ]; then
+      # An added file in the fixed version has no correspondent version in the
+      # buggy version and therefore no buggy component could be computed
       continue
-    else
-      # Copied (C), Deleted (D), Modified (M), Renamed (R), have their type (i.e.
-      # regular file, symlink, submodule, ...​) changed (T), are Unmerged (U),
-      # are Unknown (X), or have had their pairing Broken (B).
-      if [ "$fixed_file_path" == "" ]; then
+    fi
+
+    num_cols=$(echo "$row" | tr '\t' '\n' | wc -l)
+    if [ "$num_cols" -eq "2" ]; then
+      # For example, Added (A), Modified (M), have their type (i.e. regular file,
+      # symlink, submodule, ...​) changed (T), are Unmerged (U), are Unknown (X),
+      # or have had their pairing Broken (B)
+      if [ "$status" == "D" ]; then
+        # A buggy file in the buggy version which has been deleted in the fixed
+        # version has no correspondent in the fixed version, as the file no
+        # longer exist
+        buggy_file_path=$(echo "$row" | cut -f2 -d$'\t')
+        fixed_file_path="$EMPTY_FILE"
+      else
+        # Otherwise, the buggy and fixed file are still in the same path
+        buggy_file_path=$(echo "$row" | cut -f2 -d$'\t')
         fixed_file_path="$buggy_file_path"
       fi
+    elif [ "$num_cols" -eq "3" ]; then
+      # For example, Copied (C) and Renamed (R)
+      buggy_file_path=$(echo "$row" | cut -f2 -d$'\t')
+      fixed_file_path=$(echo "$row" | cut -f3 -d$'\t')
+    else
+      die "[ERROR] Unknown/Unsupported number of rows!"
     fi
+
     [ "$buggy_file_path" != "" ] || die "[ERROR] Path to the buggy file cannot be empty! $project_full_name :: $bug_id :: $fix_commit_hash"
     [ "$fixed_file_path" != "" ] || die "[ERROR] Path to the fixed file cannot be empty! $project_full_name :: $bug_id :: $fix_commit_hash"
 

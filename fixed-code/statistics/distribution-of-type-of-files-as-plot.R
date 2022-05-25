@@ -1,6 +1,5 @@
 # ------------------------------------------------------------------------------
-# This script plots the distribution of files as 
-# UpSetR plot.
+# This script plots the distribution of each type of file as UpSetR plot.
 #
 # Usage:
 #   Rscript distribution-of-type-of-files-as-plot.R

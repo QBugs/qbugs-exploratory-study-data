@@ -163,7 +163,10 @@ while read -r item; do
     [ -s "$tmp_buggy_file" ] || die "[ERROR] $tmp_buggy_file does not exist or it is empty!"
 
     # Get fixed file's content
-    if [ "$fixed_file_path" != "$EMPTY_FILE" ]; then
+    if [ "$fixed_file_path" == "$EMPTY_FILE" ]; then
+      touch "$tmp_fixed_file"
+      [ -f "$tmp_fixed_file" ] || die "[ERROR] $tmp_fixed_file does not exist!"
+    else
       git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" show "$fix_commit_hash:$fixed_file_path" > "$tmp_fixed_file" || die "[ERROR] Failed to collect $fixed_file_path from the fixed commit $fix_commit_hash!"
       [ -s "$tmp_fixed_file" ] || die "[ERROR] $tmp_fixed_file does not exist or it is empty!"
     fi

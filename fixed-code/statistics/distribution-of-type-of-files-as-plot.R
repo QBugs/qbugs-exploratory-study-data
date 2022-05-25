@@ -20,7 +20,7 @@ library('effsize')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
-  stop('USAGE: Rscript distribution-of-buggy-components-as-plot.R <input data file, e.g., ../data/generated/type-of-file.csv> <output pdf file, e.g.,  distribution-of-type-of-files-as-plot.pdf>')
+  stop('USAGE: Rscript distribution-of-type-of-files-as-plot.R <input data file, e.g., ../data/generated/type-of-file.csv> <output pdf file, e.g.,  distribution-of-type-of-files-as-plot.pdf>')
 }
 
 # Args

@@ -68,6 +68,8 @@ while read -r item; do
              bug_id=$(echo "$item" | cut -f4 -d',' | tr -d '"')
            bug_type=$(echo "$item" | cut -f5 -d',' | tr -d '"')
 
+  echo "[DEBUG] $project_full_name :: $bug_id :: $fix_commit_hash"
+
   while read -r file_path; do
     echo "$project_full_name,$fix_commit_hash,$buggy_commit_hash,$bug_id,$bug_type,$file_path" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
   done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff-tree --no-commit-id --name-only -r "$fix_commit_hash")

@@ -192,6 +192,8 @@ done < <(tail -n +2 "$BUGS_FILE_PATH")
 # Deactivate virtual environment
 deactivate || die "[ERROR] Failed to deactivate virtual environment!"
 
+rm -rf "$TMP_DIR" # Remove no longer required temporary directory
+
 echo "DONE!"
 exit 0
 

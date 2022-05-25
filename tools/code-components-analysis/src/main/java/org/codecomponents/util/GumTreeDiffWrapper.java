@@ -104,6 +104,30 @@ public class GumTreeDiffWrapper {
         return buggyComponents;
     }
 
+    /**
+     *
+     * @return
+     */
+    public Set<Component> findFixedComponents() {
+        // Retrieve the default matcher
+        final Matcher matcher = Matchers.getInstance().getMatcher();
+        // Compute the mappings between the buggy and fixed tree
+        final MappingStore mappings = matcher.match(this.buggyTree, this.fixedTree);
+        // Instantiate the simplified Chawathe script generator
+        final EditScriptGenerator editScriptGenerator = new ChawatheScriptGenerator();
+        // Compute the edit script
+        final EditScript actions = editScriptGenerator.computeActions(mappings);
+        // Process the edit actions
+        final Set<Component> fixedComponents = new LinkedHashSet<Component>();
+        for (Action action : actions) {
+            final Tree node = action.getNode();
+            if (action instanceof Addition || action instanceof Move || action instanceof Update) {
+                fixedComponents.addAll(this.findAllComponents(lineReaderFixedFile, node, action));
+            }
+        }
+        return fixedComponents;
+    }
+
     private List<Component> findAllComponents(final LineReader lineReader, final Tree node, final Action action) {
         final List<Component> components = new ArrayList<Component>();
 

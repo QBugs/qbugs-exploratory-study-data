@@ -99,12 +99,34 @@ boxplot_it(agg_count[agg_count$'bug_type' == 'Quantum', ], 'Quantum bugs', facet
 # As barplot
 #
 
-plot_label('Classical and Quantum bugs (same plot) as a barplot')
+plot_label('Number of occurrences of each component as a barplot')
 p <- ggplot(df, aes(x=buggy_component, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
 # Change y axis label
 p <- p + scale_y_continuous(name='# Occurrences (log10)', trans='log10')
+# Use grey scale color palette
+p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+# Put legend's title on top and increase size of [x-y]axis labels
+p <- p + theme(legend.position='top',
+  axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
+  axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),
+  axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
+  axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
+)
+# Add labels over bars
+p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), position=position_dodge(width=1.1), hjust=-0.15)
+# Make it horizontal
+p <- p + coord_flip()
+# Print it
+print(p)
+
+plot_label('Number of bugs in which each component appears as a barplot')
+p <- ggplot(aggregate(x=. ~ bug_id + bug_type + buggy_component, data=df, FUN=length), aes(x=buggy_component, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
+# Change x axis label
+p <- p + scale_x_discrete(name='')
+# Change y axis label
+p <- p + scale_y_continuous(name='# Bugs')
 # Use grey scale color palette
 p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
 # Put legend's title on top and increase size of [x-y]axis labels

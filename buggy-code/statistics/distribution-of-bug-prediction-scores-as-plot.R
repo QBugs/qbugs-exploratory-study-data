@@ -131,7 +131,12 @@ mergedDf <- merge(x = buggyComponents,y = df, by=c("file_path","bug_id","line_nu
 mergedDf['buggy'][is.na(mergedDf['buggy'])] <- 0
 mergedDf['defect'][is.na(mergedDf['defect'])] <- 0
 
-head(mergedDf)
+#head(mergedDf)
+unique_component <- unique(mergedDf$'buggy_component')
+print(unique_component)
+teste <- subset(mergedDf, buggy_component == 'fstring_string',
+                           select=c(bug_id, file_path, line_number, defect)) 
+head(teste, n = 17L)
 
 
 ### parse rows by bug_id to do rankings, appending data using iteration into an emptydf with ranking column to then merge with main dataframe
@@ -211,7 +216,7 @@ boxplot_it <- function(mergedDf, label, facets=FALSE, fill=FALSE) {
   } else {
     p <- ggplot(mergedDf, aes(x=buggy_component, y=defect))
   }
-  p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
+  p <- p + geom_boxplot(width=3, position=position_dodge(width=5), varwidth = TRUE)
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label

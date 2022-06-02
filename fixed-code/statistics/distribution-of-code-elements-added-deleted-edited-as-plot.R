@@ -2,7 +2,7 @@
 # This script plots the distribution of code elements deleted, added or edited by a bugfix commit as boxplot 
 #
 # Usage:
-#   Rscript distribution-of-bug-prediction-scores-as-plot.R
+#   Rscript distribution-of-code-elements-added-deleted-edited-as-plot.R
 #     <input data file, e.g., ../data/generated/fixed-code-data.csv>
 #     <input data file, e.g., ../../buggy-code/data/generated/buggy-code-data.csv>
 #     <output pdf file, e.g., distribution-of-code-elements-added-deleted-edited-as-plot.pdf>
@@ -138,6 +138,7 @@ boxplot_it(merge_agg_count, 'Classical and Quantum bugs (same plot)', facets=FAL
 boxplot_it(merge_agg_count, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE, 'Number of code components edited(log10)')
 boxplot_it(merge_agg_count[merge_agg_count$'bug_type' == 'Classical' , ], 'Classical bugs', facets=FALSE, fill=FALSE, 'Number of code components edited(log10)')
 boxplot_it(merge_agg_count[merge_agg_count$'bug_type' == 'Quantum' , ], 'Quantum bugs', facets=FALSE, fill=FALSE, 'Number of code components edited(log10)')
+
 
 
 

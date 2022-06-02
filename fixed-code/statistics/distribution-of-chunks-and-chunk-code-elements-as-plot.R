@@ -33,14 +33,56 @@ OUTPUT_FILE          <- args[2]
 #
 # Boxplot
 #
-boxplot_it <- function(df, label, facets=FALSE, fill=FALSE, yAxisLabel) {
+boxplot_it_chunk <- function(df, label, facets=FALSE, fill=FALSE, yAxisLabel) {
   # Identify plot
   plot_label(label)
   # Basic boxplot
   if (fill) {
-    p <- ggplot(df, aes(x=buggy_component, y=count, fill=bug_type))
+    p <- ggplot(df, aes(x=bug_id, y=chunk_size, fill=bug_type))
   } else {
-    p <- ggplot(df, aes(x=buggy_component, y=count))
+    p <- ggplot(df, aes(x=bug_id, y=chunk_size))
+  }
+  p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
+  # Change x axis label
+  p <- p + scale_x_discrete(name='')
+  # Change y axis label
+  p <- p + scale_y_continuous(name= yAxisLabel, trans='log10')
+  # Use grey scale color palette
+  if (fill) {
+    p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+  }
+  # Move legend's title to the top and increase size of [x-y]axis labels
+  p <- p + theme(legend.position='top',
+                 axis.text.x=element_text(size=5,  hjust=0.75, vjust=0.5),
+                 axis.text.y=element_text(size=5,  hjust=1.0, vjust=0.0),
+                 axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
+                 axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
+  )
+  # Make it horizontal
+  p <- p + coord_flip()
+  # Add mean points
+  if (fill) {
+    p <- p + stat_summary(aes(shape=bug_type), fun=mean, geom='point', size=1.5, color='black', show.legend=TRUE, position=position_dodge(width=1))
+    p <- p + scale_shape_manual(name='', values=c(10, 12))
+  } else {
+    p <- p + stat_summary(fun=mean, geom='point', shape=8, size=2, fill='black', color='black')
+  }
+  # Create facets, one per type of bug
+  if (facets) {
+    p <- p + facet_grid(~ bug_type)
+  }
+  # Print it
+  print(p)
+}
+
+boxplot_it_chunk_code_element_count <- function(df, label, facets=FALSE, fill=FALSE, yAxisLabel) {
+  # Identify plot
+  plot_label(label)
+  # Basic boxplot
+  if (fill) {
+    p <- ggplot(df, aes(x=chunk_ID, y=count, fill=bug_type))
+  } else {
+    p <- ggplot(df, aes(x=chunk_ID, y=count))
   }
   p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
   # Change x axis label
@@ -148,23 +190,49 @@ for(i in groupDf){
 
 chunkDf$'chunk_ID' <- 1:nrow(chunkDf)
 
-#print('outputting chunkDf...')
+cat('[INFO] Outputting chunkDf... \n')
 head(chunkDf, n = 10L)
 
 ## testing the data with previous data sample to check whether the results are the same
-
 #testData <- chunkDf[chunkDf$'project_full_name' == 'ec1b4ce759f1fb8ba0242dd6c4a309fa1b586666' & chunkDf$'bug_id' == 1 & chunkDf$'fixed_file_path' == 'qiskit_ignis/tomography/fitters/cvx_fit.py' , ]
 #head(testData)
 
-print('Calculating total number of code elements per chunk')
+cat('[INFO] Calculating total number of code elements per chunk \n')
 
- sqldf("SELECT a.fixed_component,a.project_full_name,a.bug_id, a.bug_type, a.fixed_line_number, a.fixed_file_path, b.chunk_ID, b.end_chunk, b.begin_chunk, b.chunk_size
-       FROM chunkDf as b
-       LEFT JOIN FixDf as a
-       ON a.fix_commit_hash = b.fix_commit_hash AND a.fixed_file_path = b.fixed_file_path
-       WHERE a.fixed_line_number <= b.end_chunk AND a.fixed_line_number >= b.begin_chunk
-       LIMIT 300")
+codeElementChunkDf <- sqldf("SELECT a.fixed_component,a.project_full_name,a.bug_id, a.bug_type, a.fixed_line_number, a.fixed_file_path, b.chunk_ID, b.end_chunk, b.begin_chunk, b.chunk_size
+                             FROM chunkDf as b
+                             LEFT JOIN FixDf as a
+                             ON a.fix_commit_hash = b.fix_commit_hash AND a.fixed_file_path = b.fixed_file_path
+                             WHERE a.fixed_line_number <= b.end_chunk AND a.fixed_line_number >= b.begin_chunk
+                             ")
 
+codeElementChunkDf$'count' <- 1
+codeElementChunkDf_agg <- aggregate(x= count ~ chunk_ID + bug_id + bug_type , data=codeElementChunkDf, FUN=sum)
+head(codeElementChunkDf_agg)
+ 
+cat('[INFO] Plotting chunk distribution and code elements per chunk \n')
+
+# Remove any existing output file and create a new one
+unlink(OUTPUT_FILE)
+pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=10)
+# Add a cover page to the output file
+plot_label('Distributions')
+
+##Plotting chunk distribution
+
+boxplot_it_chunk(chunkDf, 'Overall', facets=FALSE, fill=FALSE, 'Chunk Size')
+boxplot_it_chunk(chunkDf, 'Classical and Quantum bugs (same plot)', facets=FALSE, fill=TRUE, 'Chunk Size')
+boxplot_it_chunk(chunkDf, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE, 'Chunk Size')
+boxplot_it_chunk(chunkDf[chunkDf$'bug_type' == 'Classical' , ], 'Classical bugs', facets=FALSE, fill=FALSE, 'Chunk Size')
+boxplot_it_chunk(chunkDf[chunkDf$'bug_type' == 'Quantum' , ], 'Quantum bugs', facets=FALSE, fill=FALSE, 'Chunk Size')
+
+## Plotting fix code element distribution per chunk
+
+boxplot_it_chunk_code_element_count(codeElementChunkDf_agg, 'Overall', facets=FALSE, fill=FALSE, 'Fix Code Element Occurrence')
+boxplot_it_chunk_code_element_count(codeElementChunkDf_agg, 'Classical and Quantum bugs (same plot)', facets=FALSE, fill=TRUE, 'Fix Code Element Occurrence')
+boxplot_it_chunk_code_element_count(codeElementChunkDf_agg, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE, 'Fix Code Element Occurrence')
+boxplot_it_chunk_code_element_count(codeElementChunkDf_agg[codeElementChunkDf_agg$'bug_type' == 'Classical' , ], 'Classical bugs', facets=FALSE, fill=FALSE, 'Fix Code Element Occurrence')
+boxplot_it_chunk_code_element_count(codeElementChunkDf_agg[codeElementChunkDf_agg$'bug_type' == 'Quantum' , ], 'Quantum bugs', facets=FALSE, fill=FALSE, 'Fix Code Element Occurrence')
 
 
 

@@ -114,6 +114,27 @@ head(mergeDf)
 merge_agg_count <- aggregate(x=count ~ bug_id + bug_type + buggy_component, data=mergeDf, FUN=sum)
 head(merge_agg_count)
 
+# Count how many bugs are fixed by just adding new code elements, i.e, only A operation
+print('Df with only A')
+tmpList <- unique(FixDf$'bug_id')
+NoADf <- FixDf[!FixDf$edit_action =="A",]
+tmpList2 <- unique(NoADf$'bug_id')
+compareId <- intersect(tmpList,tmpList2)
+countBug <- length(tmpList) - length(compareId)
+
+print(countBug)
+
+
+# Count how many bugs are fixed by just deleting code elements, i.e, only D operation
+print('Df with only D')
+tmpList <- unique(BuggyDf$'bug_id')
+NoDDf <- BuggyDf[!BuggyDf$edit_action =="D",]
+tmpList2 <- unique(NoDDf$'bug_id')
+compareId <- intersect(tmpList,tmpList2)
+countBug <- length(tmpList) - length(compareId)
+
+print(countBug)
+
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)
 pdf(file=OUTPUT_FILE, family='Helvetica', width=10, height=10)

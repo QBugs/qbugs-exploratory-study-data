@@ -21,7 +21,7 @@ library('dplyr')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 3) {
-  stop('USAGE: repair-actions-as-plot.R <fixed components input data file, e.g., ../data/generated/fixed-code-data.csv> <buggy components input data file, e.g., ../../buggy-code/data/generated/buggy-code-data.csv> <output pdf file, e.g., repair-actions-as-plot.pdf>')
+  stop('USAGE: Rscript repair-actions-as-plot.R <fixed components input data file, e.g., ../data/generated/fixed-code-data.csv> <buggy components input data file, e.g., ../../buggy-code/data/generated/buggy-code-data.csv> <output pdf file, e.g., repair-actions-as-plot.pdf>')
 }
 
 # Args

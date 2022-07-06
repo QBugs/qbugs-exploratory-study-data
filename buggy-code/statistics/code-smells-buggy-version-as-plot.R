@@ -33,6 +33,7 @@ OUTPUT_FILE <- args[2]
 # Load data
 buggy_df <- load_CSV(BUGGY_CODE_SMELLS)
 head(buggy_df)
+print('Count number of bugs')
 
 ## Filter data by metric values above the ones proposed in pysmell paper
 tmp_df <- buggy_df[(buggy_df$code_smell_metric == 'PAR' & buggy_df$code_smell_metric_value >= 5) | (buggy_df$code_smell_metric == 'MLOC' & buggy_df$code_smell_metric_value >= 100) | (buggy_df$code_smell_metric == 'DOC' & buggy_df$code_smell_metric_value >= 3) | (buggy_df$code_smell_metric == 'NBC' & buggy_df$code_smell_metric_value >= 3) | (buggy_df$code_smell_metric == 'CLOC' & buggy_df$code_smell_metric_value >= 200) | (buggy_df$code_smell_metric == 'LMC' & buggy_df$code_smell_metric_value >= 4) | (buggy_df$code_smell_metric == 'NOC' & buggy_df$code_smell_metric_value >= 80) | (buggy_df$code_smell_metric == 'NOO' & buggy_df$code_smell_metric_value >= 6) | (buggy_df$code_smell_metric == 'TNOC' & buggy_df$code_smell_metric_value >= 46) | (buggy_df$code_smell_metric == 'LPAR' & buggy_df$code_smell_metric_value >= 1) | (buggy_df$code_smell_metric == 'TNOL' & buggy_df$code_smell_metric_value >= 1) | (buggy_df$code_smell_metric == 'CNOC' & buggy_df$code_smell_metric_value >= 49) | (buggy_df$code_smell_metric == 'NOFF' & buggy_df$code_smell_metric_value >= 1) | (buggy_df$code_smell_metric == 'CNOO' & buggy_df$code_smell_metric_value >= 10) | (buggy_df$code_smell_metric == 'LEC' & buggy_df$code_smell_metric_value >= 3) | (buggy_df$code_smell_metric == 'DNC' & buggy_df$code_smell_metric_value >= 2) | (buggy_df$code_smell_metric == 'NCT' & buggy_df$code_smell_metric_value >= 1)  , ]
@@ -100,7 +101,7 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
-  p <- p + scale_y_continuous(name='# Repair Action Occurrences')
+  p <- p + scale_y_continuous(name='# Code Smell Occurrences', trans='log10')
   # Use grey scale color palette
   if (fill) {
     p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
@@ -135,29 +136,7 @@ boxplot_it(agg_count, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=F
 
 ### As Barplot
 
-plot_label('Number of occurrences of each smell as a barplot')
-p <- ggplot(code_smell_df, aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
-# Change x axis label
-p <- p + scale_x_discrete(name='')
-# Change y axis label
-p <- p + scale_y_continuous(name='# Occurrences (log10)', trans='log10')
-# Use grey scale color palette
-p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
-# Put legend's title on top and increase size of [x-y]axis labels
-p <- p + theme(legend.position='top',
-               axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
-               axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),
-               axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
-               axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
-)
-# Add labels over bars
-p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), position=position_dodge(width=1.1), hjust=-0.15)
-# Make it horizontal
-p <- p + coord_flip()
-# Print it
-print(p)
-
-plot_label('Number of occurrences of each component as a barplot')
+plot_label('Number of occurrences of each code smell as a barplot')
 p <- ggplot(code_smell_df, aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
@@ -179,7 +158,7 @@ p <- p + coord_flip()
 # Print it
 print(p)
 
-plot_label('Number of bugs in which each component appears as a barplot')
+plot_label('Number of bugs in which each code smell appears as a barplot')
 p <- ggplot(aggregate(x=. ~ bug_id + bug_type + code_smell, data=code_smell_df, FUN=length), aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
@@ -200,3 +179,11 @@ p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), p
 p <- p + coord_flip()
 # Print it
 print(p)
+
+print('Computing mean values')
+
+mean_df = agg_count %>% group_by(code_smell, bug_type) %>%
+  summarise(mean = mean(count),
+            .groups = 'drop')
+
+print(tibble(mean_df), n=40)

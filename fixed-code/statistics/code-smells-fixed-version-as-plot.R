@@ -100,7 +100,7 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
-  p <- p + scale_y_continuous(name='# Repair Action Occurrences')
+  p <- p + scale_y_continuous(name='# Code Smell Occurrences', trans = 'log10')
   # Use grey scale color palette
   if (fill) {
     p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
@@ -135,7 +135,7 @@ boxplot_it(agg_count, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=F
 
 ### As Barplot
 
-plot_label('Number of occurrences of each smell as a barplot')
+plot_label('Number of occurrences of each code smell as a barplot')
 p <- ggplot(code_smell_df, aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
@@ -157,7 +157,7 @@ p <- p + coord_flip()
 # Print it
 print(p)
 
-plot_label('Number of occurrences of each component as a barplot')
+plot_label('Number of occurrences of each code smell as a barplot')
 p <- ggplot(code_smell_df, aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
@@ -179,7 +179,7 @@ p <- p + coord_flip()
 # Print it
 print(p)
 
-plot_label('Number of bugs in which each component appears as a barplot')
+plot_label('Number of bugs in which each code smell appears as a barplot')
 p <- ggplot(aggregate(x=. ~ bug_id + bug_type + code_smell, data=code_smell_df, FUN=length), aes(x=code_smell, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
 # Change x axis label
 p <- p + scale_x_discrete(name='')
@@ -200,3 +200,11 @@ p <- p + stat_count(geom='text', colour='black', size=3, aes(label=..count..), p
 p <- p + coord_flip()
 # Print it
 print(p)
+
+print('Computing mean values')
+
+mean_df = agg_count %>% group_by(code_smell, bug_type) %>%
+  summarise(mean = mean(count),
+            .groups = 'drop')
+
+print(tibble(mean_df), n=40)

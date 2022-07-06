@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# This script plots the distribution of repair actions as plot and generates a CSV containing the occurrences of unique repair actions.
+# This script plots the distribution of repair actions as plot and generates a CSV containing the occurrences of the top30 unique repair actions.
 # Usage:
 #   Rscript repair-actions-as-plot.R
 #     <fixed components input data file, e.g., ../data/generated/fixed-code-data.csv>
@@ -50,7 +50,7 @@ both_df$edit_action[both_df$edit_action =='M'] <- 'E'
 both_df$'component_and_edit_action' <- paste(both_df$'fixed_component',both_df$'edit_action', sep = '-')
 head(both_df)
 
-print('Group by bug_id, file and project and append all values into a string followed by sorting the string')
+print('Group by bug_id, file, project and type and append all values into a string followed by sorting the string')
 options(dplyr.summarise.inform = FALSE)
 both_list_df <- both_df %>% group_by(fixed_file_path,bug_id,project_full_name,bug_type) %>% 
   summarize(component_and_edit_action = paste(sort(unique(component_and_edit_action)),collapse=","))
@@ -58,13 +58,46 @@ both_list_df$'component_and_edit_action' <- unname(sapply(both_list_df$'componen
   paste(sort(trimws(strsplit(x[1], ',')[[1]])), collapse=',')} ))
 print(both_list_df)
 
+print(' Parsing df into bugs labelled as classical and quantum to compute unique repair actions')
+
+quantum_df <- both_list_df[both_list_df$bug_type == 'Quantum' , ]
+classical_df <- both_list_df[both_list_df$bug_type == 'Classical' , ]
+
 print('Aggregating data by component_and_edit_action and counting occurrences of unique repair actions')
+
+print('Quantum')
+
+quantum_df$'count' = 1
+quantum_agg_count <- aggregate(x=count ~ component_and_edit_action , data=quantum_df, FUN=sum)
+quantum_agg_count <- transform(quantum_agg_count, size=nchar(as.character(component_and_edit_action)))
+quantum_agg_count <- quantum_agg_count[order(-quantum_agg_count$count,quantum_agg_count$size),]
+quantum_agg_count$'size' <- NULL
+head(quantum_agg_count)
+print(nrow(quantum_agg_count))
+
+print('Writing top 30 repair operations for bugs labelled as Quantum to csv')
+quantum_top30_df <- head(quantum_agg_count,30)
+write.csv(quantum_top30_df,"quantum-repair-actions.csv", row.names = FALSE)
+
+print('Classical')
+
+classical_df$'count' = 1
+classical_agg_count <- aggregate(x=count ~ component_and_edit_action , data=classical_df, FUN=sum)
+classical_agg_count <- transform(classical_agg_count, size=nchar(as.character(component_and_edit_action)))
+classical_agg_count <- classical_agg_count[order(-classical_agg_count$count,classical_agg_count$size),]
+classical_agg_count$'size' <- NULL
+head(classical_agg_count)
+print(nrow(classical_agg_count))
+
+print('Writing top 30 repair operations for bugs labelled as Classical to csv')
+classical_top30_df <- head(classical_agg_count,30)
+write.csv(classical_top30_df,"classical-repair-actions.csv", row.names = FALSE)
+
+print('Overall')
+
 both_list_df$'count' = 1
 agg_count <- aggregate(x=count ~ component_and_edit_action , data=both_list_df, FUN=sum)
 agg_count <- agg_count[order(-agg_count$count),]
-head(agg_count)
-print(nrow(agg_count))
-write.csv(agg_count,"repair-actions.csv", row.names = FALSE)
 
 print('Aggregating data by component_and_edit_action,file,bug_id and project and plot the distribution of unique repair actions per project')
 
@@ -126,4 +159,68 @@ boxplot_it(agg_count_project, 'Overall', facets=FALSE, fill=FALSE)
 boxplot_it(agg_count_project, 'Classical and Quantum bugs (same plot)', facets=FALSE, fill=TRUE)
 boxplot_it(agg_count_project, 'Classical and Quantum bugs (facets)', facets=TRUE, fill=FALSE)
 
+print('Computing mean values')
 
+mean_df = agg_count_project %>% group_by(project_full_name, bug_type) %>%
+  summarise(mean = mean(count),
+            .groups = 'drop')
+
+print(tibble(mean_df), n=40)
+
+### As Barplot
+
+print('Plotting barplot for Quantum')
+
+quantum_merge_df = merge(x=quantum_df,y=quantum_top30_df,by="component_and_edit_action")
+
+plot_label('Number of bugs in which each top 30 repair action appears as a barplot')
+p <- ggplot(aggregate(x=. ~ bug_id + bug_type + component_and_edit_action, data=quantum_merge_df, FUN=length), aes(x=component_and_edit_action, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
+# Change x axis label
+p <- p + scale_x_discrete(name='')
+# Change y axis label
+p <- p + scale_y_continuous(name='# Bugs')
+# Use grey scale color palette
+p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+# Put legend's title on top and increase size of [x-y]axis labels
+p <- p + theme(legend.position='top',
+               axis.text.x=element_text(size=6,  hjust=0.75, vjust=0.5),
+               axis.text.y=element_text(size=6,  hjust=1.0, vjust=0.0),
+               axis.title.x=element_text(size=8, hjust=0.5, vjust=0.0),
+               axis.title.y=element_text(size=8, hjust=0.5, vjust=0.5)
+)
+# Add labels over bars
+p <- p + stat_count(geom='text', colour='black', size=1, aes(label=..count..), position=position_dodge(width=1.1), hjust=-0.15)
+# Make it horizontal
+p <- p + coord_flip()
+# Print it
+print(p)
+
+
+print('Plotting barplot for Classical')
+
+classical_merge_df = merge(x=classical_df,y=classical_top30_df,by="component_and_edit_action")
+classical_merge_df$'wrap' = str_wrap(classical_merge_df$'component_and_edit_action', width = 10)
+
+plot_label('Number of bugs in which each top 30 repair action appears as a barplot')
+p <- ggplot(aggregate(x=. ~ bug_id + bug_type + component_and_edit_action, data=classical_merge_df, FUN=length), aes(x=component_and_edit_action, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
+# Change x axis label
+p <- p + scale_x_discrete(name='')
+# Change y axis label
+p <- p + scale_y_continuous(name='# Bugs')
+# Use grey scale color palette
+p <- p + scale_fill_manual(name='Bug type', values=c('#989898', '#cccccc'))
+# Put legend's title on top and increase size of [x-y]axis labels
+p <- p + theme(legend.position='top',
+               axis.text.x=element_text(size=6,  hjust=0.75, vjust=0.5),
+               axis.text.y=element_text(size=6,  hjust=1.0, vjust=0.0),
+               axis.title.x=element_text(size=8, hjust=0.5, vjust=0.0),
+               axis.title.y=element_text(size=8, hjust=0.5, vjust=0.5)
+)
+# Add labels over bars
+p <- p + stat_count(geom='text', colour='black', size=1, aes(label=..count..), position=position_dodge(width=1.1), hjust=-0.15)
+# Make it horizontal
+p <- p + coord_flip()
+# Attempt to fix long labels
+p <- p + scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +  theme(axis.text.y = element_text(angle = 90))
+# Print it
+print(p)

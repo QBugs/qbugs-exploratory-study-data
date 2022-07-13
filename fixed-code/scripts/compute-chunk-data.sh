@@ -55,7 +55,7 @@ done
 [ -s "$BUGS_FILE_PATH" ]      || die "[ERROR] $BUGS_FILE_PATH does not exist or it is empty!"
 # Remove the output_file_path (if any) and create a new one
 rm -f "$OUTPUT_FILE_PATH"
-echo "project_full_name,fix_commit_hash,buggy_commit_hash,bug_id,bug_type,fixed_file_path,chunk_header" > "$OUTPUT_FILE_PATH"
+echo "project_full_name;fix_commit_hash;buggy_commit_hash;bug_id;bug_type;fixed_file_path;chunk_header" > "$OUTPUT_FILE_PATH"
 
 # ------------------------------------------------------------------------- Main
 
@@ -74,7 +74,7 @@ while read -r item; do
     while read -r chunk_header; do
       chunk_header=$(echo "$chunk_header")
       echo "[DEBUG] $chunk_header"
-      echo "$project_full_name,$fix_commit_hash,$buggy_commit_hash,$bug_id,$bug_type,$file_path,$chunk_header" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
+      echo "$project_full_name;$fix_commit_hash;$buggy_commit_hash;$bug_id;$bug_type;$file_path;$chunk_header" >> "$OUTPUT_FILE_PATH" || die "[ERROR] Failed to append data to the $OUTPUT_FILE_PATH file!"
     done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff "$buggy_commit_hash" "$fix_commit_hash" -- "$file_path" | grep '^\@\@')
   done < <(git --git-dir="$PROJECTS_REPOSITORIES_DIR/$project_full_name" diff "$buggy_commit_hash" "$fix_commit_hash" --name-only)
 done < <(tail -n +2 "$BUGS_FILE_PATH")

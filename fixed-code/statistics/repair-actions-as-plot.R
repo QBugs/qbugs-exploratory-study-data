@@ -172,6 +172,7 @@ print(tibble(mean_df), n=40)
 print('Plotting barplot for Quantum')
 
 quantum_merge_df = merge(x=quantum_df,y=quantum_top30_df,by="component_and_edit_action")
+quantum_merge_df$'wrap' = str_wrap(quantum_merge_df$'component_and_edit_action', width = 10)
 
 plot_label('Number of bugs in which each top 30 repair action appears as a barplot')
 p <- ggplot(aggregate(x=. ~ bug_id + bug_type + component_and_edit_action, data=quantum_merge_df, FUN=length), aes(x=component_and_edit_action, fill=bug_type)) + geom_bar(position=position_dodge(width=1))
@@ -192,6 +193,8 @@ p <- p + theme(legend.position='top',
 p <- p + stat_count(geom='text', colour='black', size=1, aes(label=..count..), position=position_dodge(width=1.1), hjust=-0.15)
 # Make it horizontal
 p <- p + coord_flip()
+# Attempt to fix long labels
+p <- p + scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +  theme(axis.text.y = element_text(angle = 90))
 # Print it
 print(p)
 
@@ -224,3 +227,36 @@ p <- p + coord_flip()
 p <- p + scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +  theme(axis.text.y = element_text(angle = 90))
 # Print it
 print(p)
+
+#
+# As UpSetR plot
+#
+
+# classical_df$'count' <- 1
+# 
+# for (bug_type in unique(classical_df$'bug_type')) {
+#   columns <- colnames(df)
+#   
+#   for (keep_order in c(TRUE, FALSE)) {
+#     plot_label(paste('UpSetR (agg by bug)', '\n', 'keep.order=', keep_order, '\n', bug_type, sep=''))
+#     a <- dcast(aggregate(x=. ~ bug_id + component_and_edit_action, data=classical_df[classical_df$'bug_type' == bug_type, ], FUN=length),
+#                bug_id ~ component_and_edit_action, value.var='component_and_edit_action', fun.aggregate=length)
+#     a <- a[ , which(colnames(a) %!in% c('bug_id')) ]
+#     p <- upset(a, sets=colnames(a), order.by=c('freq'), nintersects=NA, keep.order=keep_order, set_size.show=TRUE,
+#                mb.ratio=c(0.40, 0.60), #point.size=3.5, line.size=1.1,
+#                # text.scale=c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars).
+#                text.scale=c(1, 1.2, 1, 1.2, 1.3, 1.1),
+#                set_size.scale_max=100,
+#                mainbar.y.label='Intersection Size', sets.x.label='Set Size',
+#                themes=upset_modify_themes(
+#                  list(
+#                    'Intersection size'=theme(
+#                      axis.text=element_text(size=1, face='bold')
+#                    )
+#                  )
+#                )
+#                
+#                )
+#     print(p)
+#   }
+# }

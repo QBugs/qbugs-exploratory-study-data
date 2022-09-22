@@ -114,6 +114,12 @@ head(mergeDf)
 merge_agg_count <- aggregate(x=count ~ bug_id + bug_type + buggy_component, data=mergeDf, FUN=sum)
 head(merge_agg_count)
 
+outersect <- function(x, y) {
+  sort(c(setdiff(x, y),
+         setdiff(y, x)))
+}
+
+
 # Count how many bugs are fixed by just adding new code elements, i.e, only A operation
 print('Df with only A')
 tmpList <- unique(FixDf$'bug_id')
@@ -123,6 +129,7 @@ compareId <- intersect(tmpList,tmpList2)
 countBug <- length(tmpList) - length(compareId)
 
 print(countBug)
+print(length(outersect(tmpList,tmpList2)))
 
 
 # Count how many bugs are fixed by just deleting code elements, i.e, only D operation
@@ -134,6 +141,7 @@ compareId <- intersect(tmpList,tmpList2)
 countBug <- length(tmpList) - length(compareId)
 
 print(countBug)
+print(length(outersect(tmpList,tmpList2)))
 
 # Remove any existing output file and create a new one
 unlink(OUTPUT_FILE)

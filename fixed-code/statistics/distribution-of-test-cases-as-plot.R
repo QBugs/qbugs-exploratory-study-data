@@ -42,7 +42,7 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
   } else {
     p <- ggplot(df, aes(x=bug_type, y=number_test_cases))
   }
-  p <- p + geom_boxplot(width=0.75, position=position_dodge(width=1))
+  p <- p + geom_boxplot(width=0.3, position=position_dodge(width=1))
   # Change x axis label
   p <- p + scale_x_discrete(name='')
   # Change y axis label
@@ -56,7 +56,8 @@ boxplot_it <- function(df, label, facets=FALSE, fill=FALSE) {
                  axis.text.x=element_text(size=10,  hjust=0.75, vjust=0.5),
                  axis.text.y=element_text(size=10,  hjust=1.0, vjust=0.0),
                  axis.title.x=element_text(size=12, hjust=0.5, vjust=0.0),
-                 axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5)
+                 axis.title.y=element_text(size=12, hjust=0.5, vjust=0.5),
+                 aspect.ratio=3/5
   )
   # Make it horizontal
   p <- p + coord_flip()

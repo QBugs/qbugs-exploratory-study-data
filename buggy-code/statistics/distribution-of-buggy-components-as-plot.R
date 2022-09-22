@@ -158,7 +158,7 @@ for (bug_type in unique(df$'bug_type')) {
                mb.ratio=c(0.40, 0.60), #point.size=3.5, line.size=1.1,
                # text.scale=c(intersection size title, intersection size tick labels, set size title, set size tick labels, set names, numbers above bars).
                text.scale=c(1, 1.2, 1, 1.2, 1.3, 1.1),
-               set_size.scale_max=2500,
+               set_size.scale_max=10000,
                mainbar.y.label='Intersection Size', sets.x.label='Set Size')
     print(p)
 

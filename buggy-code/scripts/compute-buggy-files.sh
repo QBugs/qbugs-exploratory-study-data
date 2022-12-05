@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 # This script computes and collects the path of all files that were buggy before
 # the bug fix was performed.  In other words, it collects the files that were
-# renamed, deleted, modified, renamed, or had their type (i.e. regular file,
+# copied, deleted, modified, renamed, or had their type (i.e. regular file,
 # symlink, submodule, ...​) changed in the bug fix commit.  The list of files is
 # then written to the provided output file.
 #

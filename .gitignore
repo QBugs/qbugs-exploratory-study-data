@@ -8,6 +8,9 @@ tools/*
 !tools/get-libraries.R
 !tools/code-components-analysis
 
+# Ignore bare clone of each quantum project's git repository
+subjects/data/generated/repositories
+
 # ---------------------------------------------------------------------- Windows
 
 # Windows thumbnail cache files

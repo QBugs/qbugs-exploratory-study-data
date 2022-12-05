@@ -28,6 +28,32 @@ embed_fonts_in_a_pdf <- function(pdf_path) {
   embed_fonts(pdf_path, options='-dSubsetFonts=true -dEmbedAllFonts=true -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dMaxSubsetPct=100')
 }
 
+# ------------------------------------------------------------------------ Stats
+
+#
+# Compute nonparametric bootstrap confidence intervals.
+#
+get_ci <- function(x) {
+  stopifnot(length(unique(x)) >= 1)
+
+  if (length(unique(x)) == 1) {
+    return(c(unique(x),unique(x)))
+  }
+
+  samplemean <- function(a, b) {
+    return(mean(a[b]))
+  }
+
+  library('boot') # install.packages('boot')
+  bootOutput <- boot(x, samplemean, R=1000)
+  bootCI <- boot.ci(bootOutput, conf=0.95, type='basic')
+
+  lower <- bootCI$'basic'[[4]]
+  upper <- bootCI$'basic'[[5]]
+
+  return(c(lower,upper))
+}
+
 # ------------------------------------------------------------------------- Plot
 
 #

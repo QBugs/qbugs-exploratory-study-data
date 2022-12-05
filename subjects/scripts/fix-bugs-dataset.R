@@ -7,8 +7,7 @@
 #
 # ------------------------------------------------------------------------------
 
-library('this.path') # install.packages('this.path')
-source(paste(this.dir(), '/../statistics/util.R', sep=''))
+source('../../utils/statistics/util.R')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) < 1) {

@@ -1,6 +1,6 @@
 # Specifications of data files
 
-## [`data/generated/bugs-in-quantum-computing-platforms.csv`](data/generated/bugs-in-quantum-computing-platforms.csv)
+## [bugs-in-quantum-computing-platforms.csv](data/generated/bugs-in-quantum-computing-platforms.csv)
 
 - `project_full_name`: Full name of a GitHub project, i.e., organization + "/" + project-name
   * factor: e.g., "Qiskit/qiskit-aer"

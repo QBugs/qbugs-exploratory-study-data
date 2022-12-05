@@ -2,8 +2,7 @@
 # A set of utility functions for 'subjects'.
 # ------------------------------------------------------------------------------
 
-library('this.path') # install.packages('this.path')
-source(paste(this.dir(), '/../../utils/statistics/util.R', sep=''))
+source('../../utils/statistics/util.R')
 
 set_programming_languages <- function(df) {
   df$'languages' <- NA

@@ -6,8 +6,7 @@
 #
 # ------------------------------------------------------------------------------
 
-library('this.path') # install.packages('this.path')
-source(paste(this.dir(), '/util.R', sep=''))
+source('util.R')
 
 args = commandArgs(trailingOnly=TRUE)
 if (length(args) < 1) {
@@ -17,8 +16,8 @@ if (length(args) < 1) {
 OUTPUT_FILE_PATH <- args[1]
 
 # Load data
-DATA_FILE_PATH <- paste(this.dir(), '/../data/generated/bugs-in-quantum-computing-platforms.csv', sep='')
-df <- set_programming_languages(read.table(DATA_FILE_PATH, header=TRUE, stringsAsFactors=FALSE))
+df <- load_CSV('../data/generated/bugs-in-quantum-computing-platforms.csv')
+df <- set_programming_languages(df)
 
 unlink(OUTPUT_FILE_PATH)
 sink(OUTPUT_FILE_PATH, append=FALSE, split=TRUE)

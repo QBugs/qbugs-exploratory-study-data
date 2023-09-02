@@ -35,13 +35,13 @@ df <- load_CSV(INPUT_FILE)
 # Set (default) type of file
 df$'file_type' <- 'Unknown'
 # Rules to set type of each file
+df$'file_type'[grep('.txt$', df$'buggy_file_path')]                                                            <- 'Text File'
 df$'file_type'[grep('CODEOWNERS|Quil.g4$|.md$|.rst$', df$'buggy_file_path')]                                   <- 'Documentation File'
 df$'file_type'[grep('.cfg$|.ini$|.toml$', df$'buggy_file_path')]                                               <- 'Configuration File'
-df$'file_type'[grep('.cpp$|.cs$|.fs$|.h$|.hpp$|.ll$|.py$|.qisa$|.qs$', df$'buggy_file_path')]                  <- 'Source Code File'
-df$'file_type'[grep('.csproj$|.fsproj$|makefile|.ps1$|Simulation.sln|Sdk.targets|.rs$', df$'buggy_file_path')] <- 'Build File'
-df$'file_type'[grep('.ipynb$|.sh$', df$'buggy_file_path')]                                                     <- 'Script File'
+df$'file_type'[grep('.cpp$|.cs$|.cc$|.cu$|.fs$|.h$|.hpp$|.ll$|.py$|.qisa$|.qs$|.ipynb', df$'buggy_file_path')] <- 'Source Code File'
+df$'file_type'[grep('.csproj$|.fsproj$|makefile|.ps1$|Simulation.sln|Sdk.targets|.rs$|requirements.txt', df$'buggy_file_path')] <- 'Build File'
+df$'file_type'[grep('.sh$', df$'buggy_file_path')]                                                             <- 'Script File'
 df$'file_type'[grep('.json$|TrialResult.repr|.yaml$|.yml$', df$'buggy_file_path')]                             <- 'Data File'
-df$'file_type'[grep('.txt$', df$'buggy_file_path')]                                                            <- 'Text File'
 
 # Aggregate data
 df$'count' <- 1
